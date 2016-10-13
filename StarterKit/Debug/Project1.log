@@ -1,0 +1,16 @@
+﻿  Vector2D.cpp
+  TinyXML2.cpp
+  TileLayer.cpp
+  PlayerFactory.cpp
+  Player.cpp
+  GameObjectParameters.cpp
+  Level.cpp
+  main.cpp
+  Layer.cpp
+  GameObjectFactory.cpp
+  Game.cpp
+  GameObject.cpp
+  Generating Code...
+  Project1.vcxproj -> C:\GamesEngineering\StarterKit\Debug\StarterKit.exe
+  Project1.vcxproj -> C:\GamesEngineering\StarterKit\Debug\StarterKit.pdb (Full PDB)
+          1 file(s) copied.
