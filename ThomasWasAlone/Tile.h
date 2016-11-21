@@ -14,6 +14,7 @@ public :
 
 
 private:
+	Rect *_Rect;
 	Point2D m_Pos;
 	Size2D m_Size;
 	std::vector<Rect> m_Rect;

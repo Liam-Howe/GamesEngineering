@@ -34,7 +34,7 @@ public:
 	void clear(const Colour&);
 	Point2D worldToScreen(const Point2D&);
 	Rect worldToScreen(const Rect&);
-
+	void drawFillRect(const Rect& r, const Colour& c);
 	void setViewPort(const Rect&);
 
 	void destroy();

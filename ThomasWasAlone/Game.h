@@ -7,6 +7,7 @@
 #include "InputManager.h"
 #include "EventListener.h"
 #include "Tile.h"
+#include "Player.h"
 
 /** The game objct whic manages the game loop*/
 class Game:public EventListener
@@ -28,6 +29,7 @@ public:
 	bool init();
 	void destroy();
 
+	Player* _player;
 	void update();
 	void render();
 	void loop();

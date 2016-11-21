@@ -9,6 +9,7 @@ using namespace std;
 #include "SpinningBox.h"
 #include "Game.h"
 #include "Tile.h"
+#include "Player.h"
 
 const int SCREEN_FPS = 100;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
@@ -18,6 +19,8 @@ Game::Game()
 {
 	pause = false;
 	quit = false;
+
+
 }
 
 
@@ -28,7 +31,7 @@ Game::~Game()
 
 bool Game::init() {	
 	Size2D winSize(800,600);
-	int tileAmount = 100;
+	int tileAmount = 20;
 	float tileCount = tileAmount * tileAmount;
 	float tileWidth = winSize.w / tileAmount;
 	float tileHeight = winSize.h / tileAmount;
@@ -53,7 +56,7 @@ bool Game::init() {
 		}
 		
 	}
-
+	 _player = new  Player(Point2D(0, 0), Size2D(tileWidth, tileHeight));
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
 	float aspectRatio = winSize.w / winSize.h;
@@ -132,7 +135,7 @@ void Game::update()
 	for (std::vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); i++) {
 		(*i)->Update(deltaTime);
 	}
-
+	
 	//save the curent time for next frame
 	lastTime = currentTime;
 }
@@ -149,10 +152,11 @@ void Game::render()
 	//}
 	for (std::vector<Tile*>::iterator i = m_tiles.begin(), e = m_tiles.end(); i != e; i++) {
 		(*i)->Render(renderer);
+		
 	
 	}
 
-
+	_player->Render(renderer);
 	renderer.present();// display the new frame (swap buffers)
 
 	

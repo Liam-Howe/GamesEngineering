@@ -7,8 +7,8 @@ Tile::Tile(Point2D pos,float _width,float _height)
 	m_Pos = pos;
 	m_Size.w = _width;
 	m_Size.h = _height;
-	Rect *_Rect = new Rect(m_Pos.x, m_Pos.y, m_Size.w, m_Size.h);
-	m_Rect.push_back(*_Rect);
+	_Rect = new Rect(m_Pos.x, m_Pos.y, m_Size.w, m_Size.h);
+	//m_Rect.push_back(*_Rect);
 }
 
 Tile::~Tile()
@@ -16,10 +16,10 @@ Tile::~Tile()
 }
 
 void Tile::Render(Renderer& r) {
-	for (int i = 0; i < m_Rect.size(); i++)
-	{
-		r.drawRect(m_Rect[i], Colour(200, 100, 80));
-	}
+	/*for (int i = 0; i < m_Rect.size(); i++)
+	{*/
+		r.drawRect(*_Rect, Colour(200, 100, 80));
+	//}
 }
 
 
