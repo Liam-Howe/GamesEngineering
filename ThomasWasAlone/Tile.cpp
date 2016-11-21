@@ -18,7 +18,7 @@ Tile::~Tile()
 void Tile::Render(Renderer& r) {
 	for (int i = 0; i < m_Rect.size(); i++)
 	{
-		r.drawWorldRect(m_Rect[i], Colour(0, 0, 0));
+		r.drawRect(m_Rect[i], Colour(200, 100, 80));
 	}
 }
 

@@ -8,7 +8,7 @@ using namespace std;
 #include "LTimer.h"
 #include "SpinningBox.h"
 #include "Game.h"
-
+#include "Tile.h"
 
 const int SCREEN_FPS = 100;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
@@ -28,9 +28,31 @@ Game::~Game()
 
 bool Game::init() {	
 	Size2D winSize(800,600);
-
+	int tileAmount = 100;
+	float tileCount = tileAmount * tileAmount;
+	float tileWidth = winSize.w / tileAmount;
+	float tileHeight = winSize.h / tileAmount;
 	//creates our renderer, which looks after drawing and the window
 	renderer.init(winSize,"Simple SDL App");
+	float x = 0;
+	float y = 0;
+	for (int i = 0; i <= tileCount; i++)
+	{
+		
+		Tile *t = new Tile(Point2D(x, y), tileWidth, tileHeight);
+		m_tiles.push_back(t);
+		
+		if (x+tileWidth >= winSize.w)
+		{
+			y = y + tileHeight;
+			x = 0;
+		}
+		else
+		{
+			x = x + tileWidth;
+		}
+		
+	}
 
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
@@ -42,6 +64,8 @@ bool Game::init() {
 	Rect vpRect(vpBottomLeft,vpSize);
 	renderer.setViewPort(vpRect);
 
+
+	
 
 	//create some game objects
 
@@ -120,9 +144,14 @@ void Game::render()
 	renderer.clear(Colour(0,0,0));// prepare for new frame
 	
 	//render every object
-	for (std::vector<GameObject*>::iterator i = gameObjects.begin(), e= gameObjects.end(); i != e; i++) {
+	//for (std::vector<GameObject*>::iterator i = gameObjects.begin(), e= gameObjects.end(); i != e; i++) {
+	//	(*i)->Render(renderer);
+	//}
+	for (std::vector<Tile*>::iterator i = m_tiles.begin(), e = m_tiles.end(); i != e; i++) {
 		(*i)->Render(renderer);
+	
 	}
+
 
 	renderer.present();// display the new frame (swap buffers)
 

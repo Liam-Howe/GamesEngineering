@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "InputManager.h"
 #include "EventListener.h"
+#include "Tile.h"
 
 /** The game objct whic manages the game loop*/
 class Game:public EventListener
@@ -14,7 +15,7 @@ class Game:public EventListener
 	Renderer renderer;
 
 	std::vector<GameObject*> gameObjects;
-
+	
 	unsigned int lastTime;//time of last update;
 
 	bool pause;
@@ -23,7 +24,7 @@ class Game:public EventListener
 public:
 	Game();
 	~Game();
-
+	std::vector<Tile*> m_tiles;
 	bool init();
 	void destroy();
 
