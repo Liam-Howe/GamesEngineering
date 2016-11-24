@@ -14,12 +14,33 @@ Player::~Player()
 {
 }
 
-void Player::Render(Renderer& r) {
+void Player::Render(Renderer& r) 
+{
 
 	r.drawFillRect(*m_Player, Colour(100, 50, 180));
 
 }
 
+void Player::move(Point2D dir)
+{
+	/*if (dir.x == 0 && dir.y == 1)
+	{
+		
+	}
+	else if(dir.x == 1 && dir.y == 0)
+	{
+		m_Player
+	}
+	else if(dir.x == 0 && dir.y == -1)
+	{
+		m_Player
+	}
+	else if(dir.x == -1 && dir.y == 0)
+	{
+		m_Player
+	}*/
+
+}
 
 void Player::Update(unsigned int deltaTime) {
 

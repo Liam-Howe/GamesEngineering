@@ -2,13 +2,32 @@
 #include "Tile.h"
 
 
-Tile::Tile(Point2D pos,float _width,float _height) 
+Tile::Tile(Point2D pos,float _width,float _height , tileType tile) 
+	: m_Pos(pos) , 
+	  m_type(tile)
 {
-	m_Pos = pos;
 	m_Size.w = _width;
 	m_Size.h = _height;
+	m_costToTravel = 0;
 	_Rect = new Rect(m_Pos.x, m_Pos.y, m_Size.w, m_Size.h);
-	//m_Rect.push_back(*_Rect);
+	
+	switch (m_type)
+	{
+	case tileType::START:
+		m_col = Colour(200, 45, 300);
+		break;
+	case tileType::TILE:
+		m_costToTravel = 9999;
+		m_col = Colour(255, 255, 255);
+		break;
+	case tileType::WALL:
+		m_costToTravel = 0;
+		m_col = Colour(100, 100, 100);
+		break;
+	case tileType::GOAL:
+		m_col = Colour(0, 0, 0);
+		break;
+	}
 }
 
 Tile::~Tile()
@@ -16,10 +35,22 @@ Tile::~Tile()
 }
 
 void Tile::Render(Renderer& r) {
-	/*for (int i = 0; i < m_Rect.size(); i++)
-	{*/
-		r.drawRect(*_Rect, Colour(200, 100, 80));
-	//}
+	switch (m_type)
+	{
+	case tileType::START:
+		r.drawFillRect(*_Rect, m_col);
+		break;
+	case tileType::TILE:
+		r.drawRect(*_Rect, m_col);
+		break;
+	case tileType::WALL:
+		r.drawFillRect(*_Rect, m_col);
+		break;
+	case tileType::GOAL:
+		r.drawFillRect(*_Rect, m_col);
+		break;
+	}
+
 }
 
 
@@ -34,3 +65,11 @@ void Tile::Update(unsigned int deltaTime) {
 
 }
 
+int Tile::getCost()
+{
+	return m_costToTravel;
+}
+Point2D Tile::getPosition()
+{
+	return m_Pos;
+}

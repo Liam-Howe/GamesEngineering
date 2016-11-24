@@ -8,7 +8,9 @@
 #include "EventListener.h"
 #include "Tile.h"
 #include "Player.h"
+#include "NPC.h"
 
+using namespace std;
 /** The game objct whic manages the game loop*/
 class Game:public EventListener
 {
@@ -25,7 +27,8 @@ class Game:public EventListener
 public:
 	Game();
 	~Game();
-	std::vector<Tile*> m_tiles;
+	vector<Tile*> m_tiles;
+	vector<NPC*> m_NPCs;
 	bool init();
 	void destroy();
 

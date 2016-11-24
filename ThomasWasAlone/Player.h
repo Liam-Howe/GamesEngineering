@@ -10,7 +10,7 @@ public :
 	~Player();
 	void Render(Renderer & r);
 	void Update(unsigned int deltaTime);
-
+	void move(Point2D dir);
 
 
 private:

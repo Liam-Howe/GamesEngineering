@@ -12,7 +12,11 @@ public:
 	enum Event {
 		REVERSE,
 		PAUSE,
-		QUIT
+		QUIT,
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT
 	};
 
 
