@@ -6,12 +6,12 @@ using namespace std;
 
 
 #include "LTimer.h"
-#include "SpinningBox.h"
 #include "Game.h"
 #include "Tile.h"
 #include "Player.h"
 #include "TileType.h"
 #include "NPC.h"
+#include "Astar.h"
 
 const int SCREEN_FPS = 100;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
@@ -75,7 +75,7 @@ bool Game::init() {
 
 	Rect vpRect(vpBottomLeft,vpSize);
 	renderer.setViewPort(vpRect);
-
+	Astar _a;
 
 	lastTime = LTimer::gameTime();
 
@@ -90,6 +90,7 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::LEFT, this);
 	return true;
 
+	_a.astar(m_tiles[23], m_tiles[56]);
 }
 
 
