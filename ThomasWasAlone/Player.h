@@ -16,6 +16,6 @@ public :
 private:
 	Point2D m_Pos;
 	Size2D m_Size;
-	Rect *m_Player;
+	Rect m_Player;
 
 };

@@ -7,17 +7,26 @@ void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<Tile*> &tiles, in
 {
 	float goalXPos = goalNode->getPosition().x;
 	float goalYPos = goalNode->getPosition().y;
-	float fn;
-	float gn;
-	float hn;
 
 	m_openNodes.push_back(startNode);
 	calculateSurroundingNodes(startNode, tiles,tileAmount);
 
-	for (int i = 0; i < m_mMaxNodes; i++)
+	if (m_openNodes.empty() == false)
 	{
-		
+		for (int i = 0; i < m_openNodes.size(); i++)
+		{
+			if (m_openNodes[i] != goalNode)
+			{
+
+			}
+		}
 	}
+	//take the best node b from the open list
+	//if open list is != empty
+	// if b != goal
+	//for all surroiunding nodes
+	//assign f, g, h values
+	//if current node 
 
 }
 

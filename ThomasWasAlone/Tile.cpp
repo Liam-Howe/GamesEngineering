@@ -69,11 +69,28 @@ int Tile::getCost()
 {
 	return m_costToTravel;
 }
+
 Point2D Tile::getPosition()
 {
 	return m_Pos;
 }
+
 Rect Tile::getRect()
 {
 	return _Rect;
+}
+
+void Tile::setFCost(int value) 
+{
+	m_fCost = value;
+}
+
+void Tile::setGCost(int value)
+{
+	m_gCost = value;
+}
+
+void Tile::setHCost(int value)
+{
+	m_hCost = value;
 }

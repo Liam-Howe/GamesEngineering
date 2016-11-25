@@ -14,7 +14,9 @@ public :
 	int getCost();
 	Point2D getPosition();
 	Rect getRect();
-
+	void setFCost(int value);
+	void setGCost(int value);
+	void setHCost(int value);
 private:
 	Rect _Rect;
 	Point2D m_Pos;
@@ -22,4 +24,7 @@ private:
 	tileType m_type;
 	Colour m_col;
 	int m_costToTravel;
+	int m_fCost;
+	int m_gCost;
+	int m_hCost;
 };

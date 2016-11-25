@@ -7,7 +7,7 @@ Player::Player(Point2D _pos, Size2D _Size)
 	: m_Pos(_pos), 
       m_Size(_Size)
 {
-	m_Player = new Rect(Point2D(m_Pos.x,m_Pos.y), Size2D(m_Size.w,m_Size.h));
+	m_Player =  Rect(Point2D(m_Pos.x,m_Pos.y), Size2D(m_Size.w,m_Size.h));
 }
 
 Player::~Player()
@@ -17,7 +17,7 @@ Player::~Player()
 void Player::Render(Renderer& r) 
 {
 
-	r.drawFillRect(*m_Player, Colour(100, 50, 180));
+	r.drawFillRect(m_Player, Colour(100, 50, 180));
 
 }
 
