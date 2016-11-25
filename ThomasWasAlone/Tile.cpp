@@ -9,7 +9,7 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile)
 	m_Size.w = _width;
 	m_Size.h = _height;
 	m_costToTravel = 0;
-	_Rect = new Rect(m_Pos.x, m_Pos.y, m_Size.w, m_Size.h);
+	_Rect = Rect(m_Pos.x, m_Pos.y, m_Size.w, m_Size.h);
 	
 	switch (m_type)
 	{
@@ -38,16 +38,16 @@ void Tile::Render(Renderer& r) {
 	switch (m_type)
 	{
 	case tileType::START:
-		r.drawFillRect(*_Rect, m_col);
+		r.drawFillRect(_Rect, m_col);
 		break;
 	case tileType::TILE:
-		r.drawRect(*_Rect, m_col);
+		r.drawRect(_Rect, m_col);
 		break;
 	case tileType::WALL:
-		r.drawFillRect(*_Rect, m_col);
+		r.drawFillRect(_Rect, m_col);
 		break;
 	case tileType::GOAL:
-		r.drawFillRect(*_Rect, m_col);
+		r.drawFillRect(_Rect, m_col);
 		break;
 	}
 
@@ -72,4 +72,8 @@ int Tile::getCost()
 Point2D Tile::getPosition()
 {
 	return m_Pos;
+}
+Rect Tile::getRect()
+{
+	return _Rect;
 }

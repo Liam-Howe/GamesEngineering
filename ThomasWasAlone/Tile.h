@@ -13,12 +13,12 @@ public :
 	void Update(unsigned int deltaTime);
 	int getCost();
 	Point2D getPosition();
+	Rect getRect();
 
 private:
-	Rect *_Rect;
+	Rect _Rect;
 	Point2D m_Pos;
 	Size2D m_Size;
-	std::vector<Rect> m_Rect;
 	tileType m_type;
 	Colour m_col;
 	int m_costToTravel;

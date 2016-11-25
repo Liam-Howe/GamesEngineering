@@ -88,9 +88,10 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::RIGHT, this);
 	inputManager.AddListener(EventListener::Event::DOWN, this);
 	inputManager.AddListener(EventListener::Event::LEFT, this);
+	_a.astar(m_tiles[31], m_tiles[56], m_tiles ,tileAmount);
 	return true;
 
-	_a.astar(m_tiles[23], m_tiles[56]);
+
 }
 
 
