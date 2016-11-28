@@ -60,9 +60,12 @@ bool Game::init() {
 		
 	}
 	int npcCount = 30;
+	int tileSpawn = 0;
+	
 	for (int i = 0; i <= npcCount; i++)
 	{
-		NPC* _temp = new NPC(m_tiles[23]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
+		tileSpawn = rand() % 35 + 405;
+		NPC* _temp = new NPC(m_tiles[tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
 		m_NPCs.push_back(_temp);
 	}
 	 _player = new  Player(Point2D(0, 0), Size2D(tileWidth, tileHeight));

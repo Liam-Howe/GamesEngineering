@@ -11,19 +11,21 @@ public :
 	~Tile();
 	void Render(Renderer & r);
 	void Update(unsigned int deltaTime);
-	int getCost();
 	Point2D getPosition();
 	Rect getRect();
 	void setFCost(int value);
 	void setGCost(int value);
 	void setHCost(int value);
+	int getGCost();
+	int getHCost();
+	int getFCost();
+
 private:
 	Rect _Rect;
 	Point2D m_Pos;
 	Size2D m_Size;
 	tileType m_type;
 	Colour m_col;
-	int m_costToTravel;
 	int m_fCost;
 	int m_gCost;
 	int m_hCost;

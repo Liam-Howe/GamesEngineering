@@ -1,5 +1,7 @@
 #pragma once
 #include "Tile.h"
+#include <queue>
+#include <list>
 class Astar {
 
 	
@@ -7,7 +9,7 @@ class Astar {
 public:
 
 	void astar(Tile *startNode, Tile *goalNode, std::vector<Tile*>&tiles, int tileAmount);
-	void calculateSurroundingNodes(Tile* currentNode, std::vector<Tile*>&tiles, int tileAmount);
+	void calculateSurroundingNodes(Tile* currentNode, std::vector<Tile*>&tiles, int tileAmount,Tile * goalNode);
 
 private:
 

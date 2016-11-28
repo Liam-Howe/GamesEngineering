@@ -8,7 +8,7 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile)
 {
 	m_Size.w = _width;
 	m_Size.h = _height;
-	m_costToTravel = 0;
+
 	_Rect = Rect(m_Pos.x, m_Pos.y, m_Size.w, m_Size.h);
 	
 	switch (m_type)
@@ -17,11 +17,12 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile)
 		m_col = Colour(200, 45, 300);
 		break;
 	case tileType::TILE:
-		m_costToTravel = 9999;
+		m_gCost = 0;
+		m_hCost = 0;
+		m_fCost = 0;
 		m_col = Colour(255, 255, 255);
 		break;
 	case tileType::WALL:
-		m_costToTravel = 0;
 		m_col = Colour(100, 100, 100);
 		break;
 	case tileType::GOAL:
@@ -65,9 +66,17 @@ void Tile::Update(unsigned int deltaTime) {
 
 }
 
-int Tile::getCost()
+int Tile::getGCost()
 {
-	return m_costToTravel;
+	return m_gCost;
+}
+int Tile::getHCost()
+{
+	return m_hCost;
+}
+int Tile::getFCost()
+{
+	return m_fCost;
 }
 
 Point2D Tile::getPosition()
