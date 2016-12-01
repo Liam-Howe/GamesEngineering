@@ -8,8 +8,8 @@ class Astar {
 
 public:
 
-	void astar(Tile *startNode, Tile *goalNode, std::vector<Tile*>&tiles, int tileAmount);
-	void calculateSurroundingNodes(Tile* currentNode, std::vector<Tile*>&tiles, int tileAmount,Tile * goalNode);
+	void astar(Tile *startNode, Tile *goalNode, std::vector<std::vector<Tile*>>&tiles, int tileAmount);
+	void calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector<Tile*>>&tiles, int tileAmount,Tile * goalNode);
 
 private:
 

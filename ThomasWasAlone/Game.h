@@ -27,7 +27,7 @@ class Game:public EventListener
 public:
 	Game();
 	~Game();
-	vector<Tile*> m_tiles;
+	vector<vector<Tile*>> m_tiles;
 	vector<NPC*> m_NPCs;
 	bool init();
 	void destroy();

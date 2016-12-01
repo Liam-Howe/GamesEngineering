@@ -42,30 +42,38 @@ bool Game::init() {
 	float x = 0;
 	float y = 0;
 	int tile = 0;
-	for (int i = 0; i <= tileCount; i++)
+
+	vector<Tile *> m_temp;
+	
+	for (int row = 0; row < tileAmount; row++)
 	{
-		tile = rand() % 1;
-		Tile *t = new Tile(Point2D(x, y), tileWidth, tileHeight, static_cast <tileType>(tile));
-		m_tiles.push_back(t);
-		
-		if (x+tileWidth >= winSize.w)
+		vector<Tile *> m_temp;
+		for (int col = 0; col < tileAmount; col++)
 		{
-			y = y + tileHeight;
-			x = 0;
+			tile = rand() % 1;
+			Tile *t = new Tile(Point2D( x,  y), tileWidth, tileHeight, static_cast <tileType>(tile));
+			m_temp.push_back(t);
+			if (x + tileWidth >= winSize.w)
+			{
+				y = y + tileHeight;
+				x = 0;
+				m_tiles.push_back(m_temp);
+			}
+			else
+			{
+				x = x + tileWidth;
+			}
 		}
-		else
-		{
-			x = x + tileWidth;
-		}
-		
+
 	}
+
 	int npcCount = 30;
 	int tileSpawn = 0;
 	
 	for (int i = 0; i <= npcCount; i++)
 	{
 		tileSpawn = rand() % 35 + 405;
-		NPC* _temp = new NPC(m_tiles[tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
+		NPC* _temp = new NPC(m_tiles[10][1]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
 		m_NPCs.push_back(_temp);
 	}
 	 _player = new  Player(Point2D(0, 0), Size2D(tileWidth, tileHeight));
@@ -91,7 +99,7 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::RIGHT, this);
 	inputManager.AddListener(EventListener::Event::DOWN, this);
 	inputManager.AddListener(EventListener::Event::LEFT, this);
-	_a.astar(m_tiles[31], m_tiles[56], m_tiles ,tileAmount);
+	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
 	return true;
 
 
@@ -134,9 +142,21 @@ void Game::render()
 	//	(*i)->Render(renderer);
 	//}
 
-	for (std::vector<Tile*>::iterator i = m_tiles.begin(), e = m_tiles.end(); i != e; i++) {
-		(*i)->Render(renderer);
+	//for (std::vector<Tile*>::iterator i = m_tiles, e = m_tiles->end(); i != e; i++) {
+	//	(*i)->Render(renderer);
+	//}
+
+	vector< vector<Tile*> >::iterator row;
+	vector<Tile*>::iterator col;
+	for (row = m_tiles.begin(); row != m_tiles.end(); row++) {
+		for (col = row->begin(); col != row->end(); col++) {
+		
+			(*col)->Render(renderer);
+		}
 	}
+
+
+
 	for (std::vector<NPC*>::iterator i = m_NPCs.begin(), e = m_NPCs.end(); i != e; i++) {
 		(*i)->Render(renderer);
 	}

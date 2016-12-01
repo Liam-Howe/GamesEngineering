@@ -3,11 +3,12 @@
 
 
 
-void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<Tile*> &tiles, int tileAmount)
+void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<std::vector<Tile*>> &tiles, int tileAmount)
 {
 	float goalXPos = goalNode->getPosition().x;
 	float goalYPos = goalNode->getPosition().y;
 	//Tile * currentTile = startNode;
+	m_openNodes.push_back(startNode);
 	calculateSurroundingNodes(startNode, tiles, tileAmount, goalNode);
 	std::priority_queue<Tile *> pq;
 	pq.push(startNode);
@@ -56,59 +57,51 @@ void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<Tile*> &tiles, in
 
 }
 
-void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<Tile*> &tiles, int tileAmount,Tile* endTile)
+void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector<Tile*>> &tiles, int tileAmount,Tile* endTile)
 {
 	//calculate surrounding nodes t othe current node
 	Point2D currentPosition = currentNode->getPosition();
-
-	for (int i = 0; i < tiles.size(); i++)
+	for (int col = 0; col < tileAmount; col++)
 	{
-			if (tiles[i] == currentNode)
+		for (int row = 0; row < tileAmount; row++)
+		{
+			if (tiles[row][col] == currentNode)
 			{
-				if (i  > tileAmount)
+				if (row != tileAmount -1)
 				{
-					tiles[i - tileAmount]->setGCost(currentNode->getGCost()+ 1);
-					//sqrt((goalXpos - currXpos)*(goalXpos - currXpos) + (goalYpos - currYpos)*(goalYpos - currYpos));//calcualtes distance to goal from current ie hn
-					tiles[i - tileAmount]->setHCost(sqrt((endTile->getPosition().x - tiles[i - tileAmount]->getPosition().x) *(endTile->getPosition().x - tiles[i - tileAmount]->getPosition().x)
-				    + (endTile->getPosition().y -tiles[i - tileAmount]->getPosition().y)*(endTile->getPosition().y - tiles[i - tileAmount]->getPosition().y)));
+					tiles[row + 1][col]->setGCost(currentNode->getGCost() + 1);
+				//	sqrt((goalXpos - currXpos)*(goalXpos - currXpos) + (goalYpos - currYpos)*(goalYpos - currYpos));//calcualtes distance to goal from current ie hn
+					tiles[row + 1][col]->setHCost(sqrt((endTile->getPosition().x - tiles[row + 1][col]->getPosition().x) *(endTile->getPosition().x - tiles[row + 1][col]->getPosition().x)
+						+ (endTile->getPosition().y - tiles[row + 1][col]->getPosition().y)*(endTile->getPosition().y - tiles[row + 1][col]->getPosition().y)));
 					//calculate f vsalues
-					tiles[i - tileAmount]->setFCost(tiles[i - tileAmount]->getGCost() + tiles[i - tileAmount]->getHCost());
-					m_openNodes.push_back(tiles[i - tileAmount]);
+					tiles[row + 1][col]->setFCost(tiles[row + 1][col]->getGCost() + tiles[row + 1][col]->getHCost());
+					m_openNodes.push_back(tiles[row + 1][col]);
 				}
-				if (i < (tileAmount * tileAmount) - tileAmount)
+				if (row !=0)
 				{
-					tiles[i - tileAmount]->setGCost(currentNode->getGCost() + 1);
-					tiles[i - tileAmount]->setHCost(sqrt((endTile->getPosition().x - tiles[i + tileAmount]->getPosition().x) *(endTile->getPosition().x - tiles[i + tileAmount]->getPosition().x)
-					+ (endTile->getPosition().y - tiles[i + tileAmount]->getPosition().y)*(endTile->getPosition().y - tiles[i + tileAmount]->getPosition().y)));
-					tiles[i + tileAmount]->setFCost(tiles[i + tileAmount]->getGCost() + tiles[i + tileAmount]->getHCost());
-					m_openNodes.push_back(tiles[i + tileAmount]);				
+					tiles[row - 1][col]->setGCost(currentNode->getGCost() + 1);
+					tiles[row - 1][col]->setHCost(sqrt((endTile->getPosition().x - tiles[row - 1][col]->getPosition().x) *(endTile->getPosition().x - tiles[row - 1][col]->getPosition().x)
+						+ (endTile->getPosition().y - tiles[row - 1][col]->getPosition().y)*(endTile->getPosition().y - tiles[row - 1][col]->getPosition().y)));
+					tiles[row - 1][col]->setFCost(tiles[row - 1][col]->getGCost() + tiles[row - 1][col]->getHCost());
+					m_openNodes.push_back(tiles[row - 1][col]);
+				}	
+				if (col != 0)
+				{
+					tiles[row ][col - 1]->setGCost(currentNode->getGCost() + 1);
+					tiles[row ][col - 1]->setHCost(sqrt((endTile->getPosition().x - tiles[row ][col - 1]->getPosition().x) *(endTile->getPosition().x - tiles[row][col - 1]->getPosition().x)
+						+ (endTile->getPosition().y - tiles[row][col - 1]->getPosition().y)*(endTile->getPosition().y - tiles[row][col - 1]->getPosition().y)));
+					tiles[row ][col - 1]->setFCost(tiles[row ][col - 1]->getGCost() + tiles[row ][col - 1]->getHCost());
+					m_openNodes.push_back(tiles[row][col -1]);
 				}
-				if (tiles[i]->getPosition().x > 0)
+				if (col != tileAmount -1)
 				{
-					tiles[i - tileAmount]->setGCost(currentNode->getGCost() + 1);
-					tiles[i - tileAmount]->setHCost(sqrt((endTile->getPosition().x - tiles[i - 1]->getPosition().x) *(endTile->getPosition().x - tiles[i - 1]->getPosition().x)
-					+ (endTile->getPosition().y - tiles[i - 1]->getPosition().y)*(endTile->getPosition().y - tiles[i - 1]->getPosition().y)));
-					tiles[i - 1]->setFCost(tiles[i - 1]->getGCost() + tiles[i - 1]->getHCost());
-					m_openNodes.push_back(tiles[i - 1]);
+					tiles[row][col + 1]->setGCost(currentNode->getGCost() + 1);
+					tiles[row][col  + 1]->setHCost(sqrt((endTile->getPosition().x - tiles[row][col + 1]->getPosition().x) *(endTile->getPosition().x - tiles[row][col + 1]->getPosition().x)
+						+ (endTile->getPosition().y - tiles[row][col + 1]->getPosition().y)*(endTile->getPosition().y - tiles[row][col + 1]->getPosition().y)));
+					tiles[row][col + 1]->setFCost(tiles[row][col + 1]->getGCost() + tiles[row][col + 1]->getHCost());
+					m_openNodes.push_back(tiles[row][col + 1]);
 				}
-				if (tiles[i]->getPosition().x < 773)//should be size minus tile width
-				{
-					tiles[i - tileAmount]->setGCost(currentNode->getGCost() + 1);
-					tiles[i - tileAmount]->setHCost(sqrt((endTile->getPosition().x - tiles[i + 1]->getPosition().x) *(endTile->getPosition().x - tiles[i + 1]->getPosition().x)
-					+ (endTile->getPosition().y - tiles[i + 1]->getPosition().y)*(endTile->getPosition().y - tiles[i + 1]->getPosition().y)));
-					tiles[i + 1]->setFCost(tiles[i + 1]->getGCost() + tiles[i + 1]->getHCost());
-					m_openNodes.push_back(tiles[i + 1]);
-				}				
 			}
-	}
-		
-		/*if (currentPosition.x == tiles[i]->getPosition().x && tiles[i]->getPosition().y == currentPosition.y + currentNode->getRect().size.h)
-		{
-			m_openNodes.push_back(tiles[i]);
 		}
-		else if (tiles[i]->getPosition().y == currentPosition.x +currentNode->getRect().size.w && tiles[i]->getPosition().y == currentPosition.y)
-		{
-			m_openNodes.push_back(tiles[i]);
-			*/
-
+	}
 }
