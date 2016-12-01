@@ -1,7 +1,3 @@
-﻿  Astar.cpp
-c:\gamesengineering\thomaswasalone\astar.cpp(75): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(92): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  Game.cpp
   ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.exe
   ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.pdb (Full PDB)

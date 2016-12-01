@@ -8,15 +8,15 @@ void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<std::vector<Tile*
 	float goalXPos = goalNode->getPosition().x;
 	float goalYPos = goalNode->getPosition().y;
 	//Tile * currentTile = startNode;
-	m_openNodes.push_back(startNode);
+	//m_openNodes.push_back(startNode);
 	calculateSurroundingNodes(startNode, tiles, tileAmount, goalNode);
-	std::priority_queue<Tile *> pq;
+	
 	pq.push(startNode);
 	
 	//while (pq.size() != 0 && pq.top() != goalNode)
 	//{
-	//	/*std::list<Tile>::iterator iter = pq.top();
-	//	std::list<Tile>::iterator endIter = pq.top()->;*/
+	////	std::list<Tile>::iterator iter = pq.top()->;
+	////	std::list<Tile>::iterator endIter = pq.top()->;
 	//	for (int i = 0; i < pq.size(); i++)
 	//	{
 	//	/*	if (pq.)
@@ -75,7 +75,8 @@ void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector
 						+ (endTile->getPosition().y - tiles[row + 1][col]->getPosition().y)*(endTile->getPosition().y - tiles[row + 1][col]->getPosition().y)));
 					//calculate f vsalues
 					tiles[row + 1][col]->setFCost(tiles[row + 1][col]->getGCost() + tiles[row + 1][col]->getHCost());
-					m_openNodes.push_back(tiles[row + 1][col]);
+					//m_openNodes.push_back(tiles[row + 1][col]);
+					pq.push(tiles[row + 1][col]);
 				}
 				if (row !=0)
 				{
@@ -83,7 +84,8 @@ void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector
 					tiles[row - 1][col]->setHCost(sqrt((endTile->getPosition().x - tiles[row - 1][col]->getPosition().x) *(endTile->getPosition().x - tiles[row - 1][col]->getPosition().x)
 						+ (endTile->getPosition().y - tiles[row - 1][col]->getPosition().y)*(endTile->getPosition().y - tiles[row - 1][col]->getPosition().y)));
 					tiles[row - 1][col]->setFCost(tiles[row - 1][col]->getGCost() + tiles[row - 1][col]->getHCost());
-					m_openNodes.push_back(tiles[row - 1][col]);
+					//m_openNodes.push_back(tiles[row - 1][col]);
+					pq.push(tiles[row - 1][col]);
 				}	
 				if (col != 0)
 				{
@@ -91,7 +93,8 @@ void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector
 					tiles[row ][col - 1]->setHCost(sqrt((endTile->getPosition().x - tiles[row ][col - 1]->getPosition().x) *(endTile->getPosition().x - tiles[row][col - 1]->getPosition().x)
 						+ (endTile->getPosition().y - tiles[row][col - 1]->getPosition().y)*(endTile->getPosition().y - tiles[row][col - 1]->getPosition().y)));
 					tiles[row ][col - 1]->setFCost(tiles[row ][col - 1]->getGCost() + tiles[row ][col - 1]->getHCost());
-					m_openNodes.push_back(tiles[row][col -1]);
+					//m_openNodes.push_back(tiles[row][col -1]);
+					pq.push(tiles[row ][col - 1]);
 				}
 				if (col != tileAmount -1)
 				{
@@ -99,7 +102,9 @@ void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector
 					tiles[row][col  + 1]->setHCost(sqrt((endTile->getPosition().x - tiles[row][col + 1]->getPosition().x) *(endTile->getPosition().x - tiles[row][col + 1]->getPosition().x)
 						+ (endTile->getPosition().y - tiles[row][col + 1]->getPosition().y)*(endTile->getPosition().y - tiles[row][col + 1]->getPosition().y)));
 					tiles[row][col + 1]->setFCost(tiles[row][col + 1]->getGCost() + tiles[row][col + 1]->getHCost());
-					m_openNodes.push_back(tiles[row][col + 1]);
+					//m_openNodes.push_back(tiles[row][col + 1]);
+					pq.push(tiles[row][col + 1]);
+					
 				}
 			}
 		}

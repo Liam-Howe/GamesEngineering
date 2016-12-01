@@ -17,7 +17,7 @@ private:
 	std::vector<Tile*> m_openNodes;
 	std::vector<Tile*> m_closedNodes;
 	int m_Count; //actual number of nodes in the graph
-
+	std::priority_queue<Tile *> pq;
 
 
 };

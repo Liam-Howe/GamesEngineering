@@ -33,8 +33,15 @@ Game::~Game()
 
 bool Game::init() {	
 	Size2D winSize(800,600);
-	int tileAmount = 30;
-	float tileCount = tileAmount * tileAmount;
+	float aspectRatio = winSize.w / winSize.h;
+	float vpWidth = 20;
+	Size2D vpSize(vpWidth, vpWidth /aspectRatio);
+	Point2D vpBottomLeft( -vpSize.w / 2, - vpSize.h / 2);
+
+	Rect vpRect(vpBottomLeft,vpSize);
+	renderer.setViewPort(vpRect);
+	float tileAmount = 900;
+	//float tileCount = tileAmount * tileAmount;
 	float tileWidth = winSize.w / tileAmount;
 	float tileHeight = winSize.h / tileAmount;
 	//creates our renderer, which looks after drawing and the window
@@ -43,7 +50,7 @@ bool Game::init() {
 	float y = 0;
 	int tile = 0;
 
-	vector<Tile *> m_temp;
+	
 	
 	for (int row = 0; row < tileAmount; row++)
 	{
@@ -63,29 +70,25 @@ bool Game::init() {
 			{
 				x = x + tileWidth;
 			}
+			
 		}
+		
 
 	}
 
-	int npcCount = 30;
+	int npcCount = 5;
 	int tileSpawn = 0;
 	
-	for (int i = 0; i <= npcCount; i++)
-	{
-		tileSpawn = rand() % 35 + 405;
-		NPC* _temp = new NPC(m_tiles[10][1]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
-		m_NPCs.push_back(_temp);
-	}
-	 _player = new  Player(Point2D(0, 0), Size2D(tileWidth, tileHeight));
+	//for (int i = 0; i <= npcCount; i++)
+	//{
+	//	tileSpawn = rand() % 30;
+	//	NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
+	//	m_NPCs.push_back(_temp);
+	//}
+	// _player = new  Player(Point2D(0, 0), Size2D(tileWidth, tileHeight));
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
-	float aspectRatio = winSize.w / winSize.h;
-	float vpWidth = 20;
-	Size2D vpSize(vpWidth, vpWidth /aspectRatio);
-	Point2D vpBottomLeft( -vpSize.w / 2, - vpSize.h / 2);
 
-	Rect vpRect(vpBottomLeft,vpSize);
-	renderer.setViewPort(vpRect);
 	Astar _a;
 
 	lastTime = LTimer::gameTime();
@@ -99,7 +102,7 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::RIGHT, this);
 	inputManager.AddListener(EventListener::Event::DOWN, this);
 	inputManager.AddListener(EventListener::Event::LEFT, this);
-	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
+//	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
 	return true;
 
 
@@ -160,7 +163,7 @@ void Game::render()
 	for (std::vector<NPC*>::iterator i = m_NPCs.begin(), e = m_NPCs.end(); i != e; i++) {
 		(*i)->Render(renderer);
 	}
-	_player->Render(renderer);
+//	_player->Render(renderer);
 	renderer.present();// display the new frame (swap buffers)
 
 	
