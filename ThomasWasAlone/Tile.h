@@ -19,7 +19,8 @@ public :
 	int getGCost();
 	int getHCost();
 	int getFCost();
-
+	void setPrevious(Tile *previous);
+	Tile * previous();
 private:
 	Rect _Rect;
 	Point2D m_Pos;
@@ -29,4 +30,5 @@ private:
 	int m_fCost;
 	int m_gCost;
 	int m_hCost;
+	Tile * m_Previous;
 };

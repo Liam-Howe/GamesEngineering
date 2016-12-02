@@ -3,32 +3,42 @@
 
 
 
+
+
 void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<std::vector<Tile*>> &tiles, int tileAmount)
 {
 	float goalXPos = goalNode->getPosition().x;
 	float goalYPos = goalNode->getPosition().y;
 	//Tile * currentTile = startNode;
 	//m_openNodes.push_back(startNode);
+	
 	calculateSurroundingNodes(startNode, tiles, tileAmount, goalNode);
-	
+
 	pq.push(startNode);
+	int i = 0;
 	
-	//while (pq.size() != 0 && pq.top() != goalNode)
-	//{
-	////	std::list<Tile>::iterator iter = pq.top()->;
-	////	std::list<Tile>::iterator endIter = pq.top()->;
-	//	for (int i = 0; i < pq.size(); i++)
-	//	{
-	//	/*	if (pq.)
-	//		{
+	while (pq.size() != 0 && pq.top() != goalNode)
+	{
+		//std::list<Tile*>::iterator iter = pq.top();
+		//std::list<Tile*>::iterator endIter = pq.top();
+		Tile * currentNode = pq.top();
+		for (int i = 0; i < pq.size(); i++)
+		{
+			if (currentNode != pq.top()->previous())
+			{
+			
+				int f = pq.top()->getFCost();
+				int childFN = currentNode->getFCost();
+				if (f < childFN)
+				{
+					currentNode->setPrevious(pq.top());
 
-	//		}*/
+				}
+			}
 
-
-
-	//	}
-	//	
-	//}
+		}
+		pq.pop();
+	}
 
 
 	//m_openNodes.push_back(startNode);
@@ -56,6 +66,10 @@ void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<std::vector<Tile*
 	////if current node 
 
 }
+
+
+
+
 
 void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector<Tile*>> &tiles, int tileAmount,Tile* endTile)
 {

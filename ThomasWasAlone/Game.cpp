@@ -40,6 +40,11 @@ bool Game::init() {
 
 	Rect vpRect(vpBottomLeft,vpSize);
 	renderer.setViewPort(vpRect);
+	
+	//camera//camera//camera
+
+			
+	//tiles//tiles//tiles
 	float tileAmount = 30;
 	//float tileCount = tileAmount * tileAmount;
 	float tileWidth = winSize.w / tileAmount;
@@ -47,9 +52,9 @@ bool Game::init() {
 	//creates our renderer, which looks after drawing and the window
 	renderer.init(winSize,"Simple SDL App");
 	
-	int tile = 0;
-	float maxRow = 0;
-	float column = 0;
+	 tile = 0;
+	 maxRow = 0;
+	 column = 0;
 	for (int row = 0; row < tileAmount; row++)
 	{
 		std::vector<Tile*> temp;
@@ -69,25 +74,26 @@ bool Game::init() {
 		}
 	}
 
-	int npcCount = 4;
-	int tileSpawn = 0;
-	
+	//ai//ai//ai//ai//ai
+	 npcCount = 4;
+	 tileSpawn = 0;
 	for (int i = 0; i <= npcCount; i++)
 	{
 		tileSpawn = rand() % 30;
 		NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
 		m_NPCs.push_back(_temp);
 	}
+
+
+
+	//player//player//player
 	 _player = new  Player(m_tiles[22][2]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255,0,0));
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
 
-	Astar _a;
-
+	//input//input//input
 	lastTime = LTimer::gameTime();
-
 	//we want this box to respond to REVERSE event
-
 	//want game loop to pause
 	inputManager.AddListener(EventListener::Event::PAUSE, this);
 	inputManager.AddListener(EventListener::Event::QUIT, this);
@@ -95,7 +101,11 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::RIGHT, this);
 	inputManager.AddListener(EventListener::Event::DOWN, this);
 	inputManager.AddListener(EventListener::Event::LEFT, this);
-//	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
+
+	//astar//astar//astar//astar
+	Astar _a;
+	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
+
 	return true;
 
 
@@ -132,16 +142,6 @@ void Game::update()
 void Game::render()
 {
 	renderer.clear(Colour(0,0,0));// prepare for new frame
-	
-	//render every object
-	//for (std::vector<GameObject*>::iterator i = gameObjects.begin(), e= gameObjects.end(); i != e; i++) {
-	//	(*i)->Render(renderer);
-	//}
-
-	//for (std::vector<Tile*>::iterator i = m_tiles.begin(), e = m_tiles.end(); i != e; i++) {
-	//	(*i)->Render(renderer);
-	//}
-
 	vector< vector<Tile*> >::iterator row;
 	vector<Tile*>::iterator col;
 	for (row = m_tiles.begin(); row != m_tiles.end(); row++) {
@@ -151,15 +151,13 @@ void Game::render()
 		}
 	}
 
-
-
 	for (std::vector<NPC*>::iterator i = m_NPCs.begin(), e = m_NPCs.end(); i != e; i++) {
 		(*i)->Render(renderer);
 	}
-	_player->Render(renderer);
-	renderer.present();// display the new frame (swap buffers)
 
-	
+	_player->Render(renderer);
+
+	renderer.present();// display the new frame (swap buffers)	
 }
 
 /** update and render game entities*/

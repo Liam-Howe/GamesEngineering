@@ -24,19 +24,36 @@ class Game:public EventListener
 	bool pause;
 	bool quit;
 
+	SDL_Rect _camera;
+	//camera atributes
+	const int m_screen_Width = 640;
+	const int m_screen_Height = 480;
+	const int m_fps = 20;
+
+
 public:
 	Game();
 	~Game();
+	//tiles
 	vector<vector<Tile*>> m_tiles;
+	int tile;
+	float maxRow;
+	float column;
+	int tileSpawn;
+	//ai
 	vector<NPC*> m_NPCs;
-	//vector<Tile*> m_tiles;
+	//player
+	Player* _player;
+	//camera
+
+	//sdl
 	bool init();
 	void destroy();
-
-	Player* _player;
 	void update();
 	void render();
 	void loop();
+	int npcCount;
+	
 
 	void onEvent(EventListener::Event);
 };

@@ -35,6 +35,14 @@ Tile::~Tile()
 {
 }
 
+void Tile::setPrevious(Tile *previous) {
+	m_Previous = previous;
+}
+Tile * Tile::previous()
+{
+	return m_Previous;
+}
+
 void Tile::Render(Renderer& r) {
 	switch (m_type)
 	{
