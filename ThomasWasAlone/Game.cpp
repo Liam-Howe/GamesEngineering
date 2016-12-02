@@ -40,52 +40,45 @@ bool Game::init() {
 
 	Rect vpRect(vpBottomLeft,vpSize);
 	renderer.setViewPort(vpRect);
-	float tileAmount = 900;
+	float tileAmount = 30;
 	//float tileCount = tileAmount * tileAmount;
 	float tileWidth = winSize.w / tileAmount;
 	float tileHeight = winSize.h / tileAmount;
 	//creates our renderer, which looks after drawing and the window
 	renderer.init(winSize,"Simple SDL App");
-	float x = 0;
-	float y = 0;
+	
 	int tile = 0;
-
-	
-	
+	float maxRow = 0;
+	float column = 0;
 	for (int row = 0; row < tileAmount; row++)
 	{
-		vector<Tile *> m_temp;
+		std::vector<Tile*> temp;
+
 		for (int col = 0; col < tileAmount; col++)
 		{
 			tile = rand() % 1;
-			Tile *t = new Tile(Point2D( x,  y), tileWidth, tileHeight, static_cast <tileType>(tile));
-			m_temp.push_back(t);
-			if (x + tileWidth >= winSize.w)
-			{
-				y = y + tileHeight;
-				x = 0;
-				m_tiles.push_back(m_temp);
-			}
-			else
-			{
-				x = x + tileWidth;
-			}
-			
+			Tile* t = new Tile(Point2D(0 + (tileWidth*maxRow), 0 + (tileHeight*column)), tileWidth, tileHeight, static_cast<tileType>(tile));
+			maxRow = maxRow + 1;
+			temp.push_back(t);
 		}
-		
-
+		if (maxRow >= tileAmount)
+		{
+			column = column + 1;
+			maxRow = 0;
+			m_tiles.push_back(temp);
+		}
 	}
 
-	int npcCount = 5;
+	int npcCount = 4;
 	int tileSpawn = 0;
 	
-	//for (int i = 0; i <= npcCount; i++)
-	//{
-	//	tileSpawn = rand() % 30;
-	//	NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
-	//	m_NPCs.push_back(_temp);
-	//}
-	// _player = new  Player(Point2D(0, 0), Size2D(tileWidth, tileHeight));
+	for (int i = 0; i <= npcCount; i++)
+	{
+		tileSpawn = rand() % 30;
+		NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
+		m_NPCs.push_back(_temp);
+	}
+	 _player = new  Player(m_tiles[22][2]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255,0,0));
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
 
@@ -145,7 +138,7 @@ void Game::render()
 	//	(*i)->Render(renderer);
 	//}
 
-	//for (std::vector<Tile*>::iterator i = m_tiles, e = m_tiles->end(); i != e; i++) {
+	//for (std::vector<Tile*>::iterator i = m_tiles.begin(), e = m_tiles.end(); i != e; i++) {
 	//	(*i)->Render(renderer);
 	//}
 
@@ -163,7 +156,7 @@ void Game::render()
 	for (std::vector<NPC*>::iterator i = m_NPCs.begin(), e = m_NPCs.end(); i != e; i++) {
 		(*i)->Render(renderer);
 	}
-//	_player->Render(renderer);
+	_player->Render(renderer);
 	renderer.present();// display the new frame (swap buffers)
 
 	

@@ -29,6 +29,7 @@ public:
 	~Game();
 	vector<vector<Tile*>> m_tiles;
 	vector<NPC*> m_NPCs;
+	//vector<Tile*> m_tiles;
 	bool init();
 	void destroy();
 
