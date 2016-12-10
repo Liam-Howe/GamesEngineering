@@ -1,7 +1,12 @@
-﻿  Astar.cpp
-c:\gamesengineering\thomaswasalone\astar.cpp(89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(99): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(108): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(117): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  Tile.cpp
+  Astar.cpp
+c:\gamesengineering\thomaswasalone\astar.cpp(18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  Game.cpp
+c:\gamesengineering\thomaswasalone\game.cpp(107): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  SDL_Starter_app.cpp
   ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.exe
   ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.pdb (Full PDB)

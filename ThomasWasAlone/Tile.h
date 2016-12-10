@@ -7,7 +7,7 @@ class Tile: public GameObject {
 
 public :
 
-	Tile(Point2D pos, float _width, float _height, tileType tile);
+	Tile(Point2D pos, float _width, float _height, tileType tile,int _gCost, int _fCost);
 	~Tile();
 	void Render(Renderer & r);
 	void Update(unsigned int deltaTime);
@@ -19,8 +19,10 @@ public :
 	int getGCost();
 	int getHCost();
 	int getFCost();
+	bool getMarked();
 	void setPrevious(Tile *previous);
 	Tile * previous();
+	void setMarked(bool value);
 private:
 	Rect _Rect;
 	Point2D m_Pos;
@@ -31,4 +33,5 @@ private:
 	int m_gCost;
 	int m_hCost;
 	Tile * m_Previous;
+	bool marked;
 };

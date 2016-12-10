@@ -62,7 +62,7 @@ bool Game::init() {
 		for (int col = 0; col < tileAmount; col++)
 		{
 			tile = rand() % 1;
-			Tile* t = new Tile(Point2D(0 + (tileWidth*maxRow), 0 + (tileHeight*column)), tileWidth, tileHeight, static_cast<tileType>(tile));
+			Tile* t = new Tile(Point2D(0 + (tileWidth*maxRow), 0 + (tileHeight*column)), tileWidth, tileHeight, static_cast<tileType>(tile),9999,9999);
 			maxRow = maxRow + 1;
 			temp.push_back(t);
 		}
@@ -105,7 +105,7 @@ bool Game::init() {
 	//astar//astar//astar//astar
 	Astar _a;
 	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
-
+	std::cout << "hi" << endl;
 	return true;
 
 

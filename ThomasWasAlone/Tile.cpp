@@ -2,9 +2,11 @@
 #include "Tile.h"
 
 
-Tile::Tile(Point2D pos,float _width,float _height , tileType tile) 
+Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, int _fCost)
 	: m_Pos(pos) , 
-	  m_type(tile)
+	  m_type(tile),
+	  m_gCost(_gCost),
+	  m_hCost(m_hCost)
 {
 	m_Size.w = _width;
 	m_Size.h = _height;
@@ -21,6 +23,7 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile)
 		m_hCost = 0;
 		m_fCost = 0;
 		m_col = Colour(255, 255, 255);
+		marked = false;
 		break;
 	case tileType::WALL:
 		m_col = Colour(100, 100, 100);
@@ -60,6 +63,15 @@ void Tile::Render(Renderer& r) {
 		break;
 	}
 
+}
+bool Tile::getMarked() 
+{
+	return marked;
+}
+
+void Tile::setMarked(bool value)
+{
+	marked = value;
 }
 
 
