@@ -25,36 +25,36 @@ void Astar::astar(Tile *startNode, Tile *goalNode, std::vector<std::vector<Tile*
 	childNode->setPrevious(NULL);
 	childNode->setMarked(true);
 	//startNode->setPrevious(startNode);
-	while (pq.size() != 0 && pq.top() != goalNode)
-	{
-		//std::list<Tile*>::iterator iter = pq.top();
-		//std::list<Tile*>::iterator endIter = pq.top();
-		
-		calculateSurroundingNodes(childNode, tiles, tileAmount, goalNode);
-		//pq.pop();
-	
-		   childNode->setPrevious(childNode);
-		   childNode = pq.top();
-		   pq.pop();
-		  
-			//childNode = pq.top();
-			if (childNode != pq.top()->previous())
-			{
-				int hn = pq.top()->getHCost();
-				int gn = pq.top()->getGCost() + 1;
-				int fn = hn + gn;
-				int childFN = childNode->getGCost() + childNode->getHCost();
-				//int Gn = pq.top()->getGCost() + childNode->getGCost();
-				if (fn < childFN)
-				{
-					childNode->setPrevious(pq.top());
-					childNode->setGCost(gn);
-				}
-			}
+	//while (pq.size() != 0 && pq.top() != goalNode)
+	//{
+	//	//std::list<Tile*>::iterator iter = pq.top();
+	//	//std::list<Tile*>::iterator endIter = pq.top();
+	//	
+	//	calculateSurroundingNodes(childNode, tiles, tileAmount, goalNode);
+	//	//pq.pop();
+	//
+	//	   childNode->setPrevious(childNode);
+	//	   childNode = pq.top();
+	//	   pq.pop();
+	//	  
+	//		//childNode = pq.top();
+	//		if (childNode != pq.top()->previous())
+	//		{
+	//			int hn = pq.top()->getHCost();
+	//			int gn = pq.top()->getGCost() + 1;
+	//			int fn = hn + gn;
+	//			int childFN = childNode->getGCost() + childNode->getHCost();
+	//			//int Gn = pq.top()->getGCost() + childNode->getGCost();
+	//			if (fn < childFN)
+	//			{
+	//				childNode->setPrevious(pq.top());
+	//				childNode->setGCost(gn);
+	//			}
+	//		}
 
-		
-		//pq.pop();
-	}
+	//	
+	//	//pq.pop();
+	//}
 	
 	/*for (Tile * i = goalNode; i->previous() != 0; i = i->previous())
 	{

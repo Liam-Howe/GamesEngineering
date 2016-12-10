@@ -12,7 +12,8 @@ using namespace std;
 #include "TileType.h"
 #include "NPC.h"
 #include "Astar.h"
-
+#include "ThreadPool.h"
+#include <functional>
 const int SCREEN_FPS = 100;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
@@ -42,7 +43,7 @@ bool Game::init() {
 	renderer.setViewPort(vpRect);
 	
 	//camera//camera//camera
-
+	ThreadPool *t = ThreadPool::getInstance();
 			
 	//tiles//tiles//tiles
 	float tileAmount = 30;
@@ -106,7 +107,18 @@ bool Game::init() {
 	Astar _a;
 	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
 	std::cout << "hi" << endl;
+
+
+
+
+	std::function<void()>functionPointer = test;
+	//functionPointer = test;
+	t->addjob(functionPointer);
 	return true;
+	
+}
+void Game::test()
+{
 
 
 }

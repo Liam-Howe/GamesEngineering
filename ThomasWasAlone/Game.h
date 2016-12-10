@@ -9,6 +9,7 @@
 #include "Tile.h"
 #include "Player.h"
 #include "NPC.h"
+#include "SDL_thread.h"
 
 using namespace std;
 /** The game objct whic manages the game loop*/
@@ -29,7 +30,8 @@ class Game:public EventListener
 	const int m_screen_Width = 640;
 	const int m_screen_Height = 480;
 	const int m_fps = 20;
-
+	SDL_Thread * thread;
+	void test();
 
 public:
 	Game();

@@ -162,6 +162,7 @@
     <ClInclude Include="Astar.h" />
     <ClInclude Include="BasicTypes.h" />
     <ClInclude Include="Compare.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="TileType.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
@@ -190,6 +191,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SDL_Starter_app.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
