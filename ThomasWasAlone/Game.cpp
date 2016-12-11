@@ -90,11 +90,7 @@ bool Game::init() {
 	{
 		pool->addNpc(m_NPCs[i]);
 	}
-		//pool->addjob(m_NPCs[i]);
-	pool->createWorkers();
-
-
-	//std::function<void(*)> test;
+	pool->addThread();
 
 
 
