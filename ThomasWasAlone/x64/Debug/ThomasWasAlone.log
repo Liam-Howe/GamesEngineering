@@ -1,7 +1,4 @@
-﻿  Game.cpp
-c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(108): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(114): error C2102: '&' requires l-value
-  Generating Code...
-  Compiling...
-  SDL_Starter_app.cpp
-  Generating Code...
+﻿  ThreadPool.cpp
+c:\gamesengineering\thomaswasalone\threadpool.cpp(56): warning C4715: 'ThreadPool::consume': not all control paths return a value
+  ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.exe
+  ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.pdb (Full PDB)

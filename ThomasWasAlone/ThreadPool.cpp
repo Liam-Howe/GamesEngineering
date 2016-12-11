@@ -24,23 +24,53 @@ ThreadPool * ThreadPool::getInstance()
 	return m_instance;
 }
 
-void ThreadPool::addjob(std::function<void()> f)
+void ThreadPool::add(std::function<void()> f)
 {
+	SDL_mutexP(_lock);
+	//SDL_LockMutex(_lock);
 	_qeue.push(f);	
+	SDL_mutexV(_lock);
+	SDL_SemPost(semaphore);
 }
-void ThreadPool::consumeJob() 
+void ThreadPool::remove()
 {
-
-
-
+	SDL_mutexP(_lock);
+	while (_qeue.size() != 0)
+	{
+		std::function<void()>f = _qeue.front();
+		_qeue.pop();
+	}
+	SDL_mutexV(_lock);
 }
-void ThreadPool::spawnWorkers()
+std::function<void()> ThreadPool::consume() 
 {
-	//int numberOfWorkers = 
-
-
+	SDL_mutexP(_lock);
+	if (_qeue.size() > 0)
+	{
+		std::function<void()>f = _qeue.front();
+		_qeue.pop();
+		return f;
+	}
+	SDL_mutexV(_lock);
+	
+}
+void ThreadPool::createWorkers()
+{
+	 numberOfWorkers = std::thread::hardware_concurrency() - 1;
+	//m_pool.push_back(work)
+	 for (int  i = 0; i <numberOfWorkers; i++)
+	 {
+ 	    m_workers.push_back(SDL_CreateThread(worker,"t",((void *)NULL)));
+	 }
 }
 
+int ThreadPool::worker(void *ptr)
+{
+	ThreadPool *t = ThreadPool::getInstance();
+	std::function<void()> r = t->consume();// consume();
+	r();
+	return 0;
+}
 SDL_sem * ThreadPool::getSem() 
 {
 	return semaphore;
