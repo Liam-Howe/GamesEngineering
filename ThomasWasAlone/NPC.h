@@ -8,7 +8,7 @@ public:
 	~NPC();
 	void Render(Renderer & r);
 	void Update(unsigned int deltaTime);
-
+	void updateColour();
 private:
 	Point2D m_Pos;
 	Size2D m_Size;

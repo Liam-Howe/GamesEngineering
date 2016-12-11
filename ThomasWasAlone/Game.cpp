@@ -84,15 +84,19 @@ bool Game::init() {
 		NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
 		m_NPCs.push_back(_temp);
 	}
+
 	ThreadPool * pool = new ThreadPool();
+	for (int i = 0; i <= npcCount; i++)
+	{
+		pool->addNpc(m_NPCs[i]);
+	}
 		//pool->addjob(m_NPCs[i]);
 	pool->createWorkers();
-	
-	for (int i = 0; i < npcCount; i++)
-	{
-		//pool->addjob();
-		
-	}
+
+
+	//std::function<void(*)> test;
+
+
 
 	//player//player//player
 	 _player = new  Player(m_tiles[22][2]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255,0,0));

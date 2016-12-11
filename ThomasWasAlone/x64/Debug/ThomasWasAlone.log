@@ -1,4 +1,5 @@
 ﻿  ThreadPool.cpp
-c:\gamesengineering\thomaswasalone\threadpool.cpp(56): warning C4715: 'ThreadPool::consume': not all control paths return a value
+c:\gamesengineering\thomaswasalone\threadpool.cpp(77): warning C4715: 'ThreadPool::consumeJob': not all control paths return a value
+c:\gamesengineering\thomaswasalone\threadpool.cpp(65): warning C4715: 'ThreadPool::consume': not all control paths return a value
   ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.exe
   ThomasWasAlone.vcxproj -> C:\GamesEngineering\x64\Debug\SDL_Starter_app.pdb (Full PDB)

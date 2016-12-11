@@ -13,7 +13,10 @@ NPC::NPC(Point2D _Pos,float  _tileWidth,float  _tileHeight, Colour _colour)
 NPC::~NPC()
 {
 }
-
+void NPC::updateColour()
+{
+	m_col = Colour(100, 20, 0);
+}
 
 
 void NPC::Update(unsigned int deltaTime)
