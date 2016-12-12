@@ -42,6 +42,7 @@ public:
 	float maxRow;
 	float column;
 	int tileSpawn;
+	Rect playerSpawnZone;
 	//ai
 	vector<NPC*> m_NPCs;
 	//player
@@ -55,8 +56,14 @@ public:
 	void render();
 	void loop();
 	int npcCount;
-	
-
 	void onEvent(EventListener::Event);
+private:
+	int minX;
+	int maxX;
+	int minY;
+	int maxY;
+	int playerSpawnX;
+	int playerSpawnY;
+	
 };
 

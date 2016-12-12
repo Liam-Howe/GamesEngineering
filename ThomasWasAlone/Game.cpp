@@ -85,17 +85,23 @@ bool Game::init() {
 		m_NPCs.push_back(_temp);
 	}
 
-	ThreadPool * pool = new ThreadPool();
+	/*ThreadPool * pool = new ThreadPool();
 	for (int i = 0; i <= npcCount; i++)
 	{
 		pool->addNpc(m_NPCs[i]);
 	}
-	pool->addThread();
-
-
-
+	pool->addThread();*/
+	 minX = 0;
+	 maxX = 5;
+     minY = 10;
+	 maxY = 15;
+	playerSpawnZone = Rect(Point2D(m_tiles[maxY+1][minX]->getPosition()), Size2D(tileHeight * 6, -tileHeight *6));
+	srand(time(NULL));
+	
 	//player//player//player
-	 _player = new  Player(m_tiles[22][2]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255,0,0));
+	playerSpawnX = rand() %(maxY - minY + 1) + minY;
+	playerSpawnY = rand() % (maxX -minX +1) +minX;
+	 _player = new  Player(m_tiles[playerSpawnX][playerSpawnY]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255,0,0));
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
 
@@ -112,8 +118,8 @@ bool Game::init() {
 
 	//astar//astar//astar//astar
 	Astar _a;
-	_a.astar(m_tiles[5][2], m_tiles[8][0], m_tiles ,tileAmount);
-	std::cout << "hi" << endl;
+	//_a.astar(m_tiles[5][2], m_tiles[5][19], m_tiles ,tileAmount);
+	//std::cout << "hi" << endl;
 
 	return true;
 	
@@ -142,9 +148,9 @@ void Game::update()
 	unsigned int deltaTime = currentTime - lastTime;//time since last update
 
 	//call update on all game objects
-	for (std::vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); i++) {
+	/*for (std::vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); i++) {
 		(*i)->Update(deltaTime);
-	}
+	}*/
 
 	vector< vector<Tile*> >::iterator row;
 	vector<Tile*>::iterator col;
@@ -154,6 +160,7 @@ void Game::update()
 			(*col)->Update(deltaTime);
 		}
 	}
+	
 	//save the curent time for next frame
 	lastTime = currentTime;
 }
@@ -175,9 +182,10 @@ void Game::render()
 	for (std::vector<NPC*>::iterator i = m_NPCs.begin(), e = m_NPCs.end(); i != e; i++) {
 		(*i)->Render(renderer);
 	}
-
+	renderer.drawRect(playerSpawnZone, Colour(0, 255, 0));
+	
 	_player->Render(renderer);
-
+	
 	renderer.present();// display the new frame (swap buffers)	
 }
 
