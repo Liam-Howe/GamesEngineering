@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "NPC.h"
+#include <iostream>
 
 NPC::NPC(Point2D _Pos,float  _tileWidth,float  _tileHeight, Colour _colour) 
 	: m_Pos(_Pos) ,
@@ -13,8 +14,12 @@ NPC::NPC(Point2D _Pos,float  _tileWidth,float  _tileHeight, Colour _colour)
 NPC::~NPC()
 {
 }
+//int i = 0;
 void NPC::updateColour()
 {
+	
+	//i++;
+	std::cout << "hi";// << i;
 	m_col = Colour(100, 20, 0);
 }
 

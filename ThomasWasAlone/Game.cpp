@@ -33,7 +33,7 @@ Game::~Game()
 
 
 bool Game::init() {	
-	Size2D winSize(800,600);
+	Size2D winSize(800,800);
 	float aspectRatio = winSize.w / winSize.h;
 	float vpWidth = 20;
 	Size2D vpSize(vpWidth, vpWidth /aspectRatio);
@@ -63,7 +63,7 @@ bool Game::init() {
 		for (int col = 0; col < tileAmount; col++)
 		{
 			tile = rand() % 1;
-			Tile* t = new Tile(Point2D(0 + (tileWidth*maxRow), 0 + (tileHeight*column)), tileWidth, tileHeight, static_cast<tileType>(tile),9999,9999);
+			Tile* t = new Tile(Point2D(0 + (tileWidth*maxRow), 0 + (tileHeight*column)), tileWidth, tileHeight, static_cast<tileType>(tile),9999,9999,row,col);
 			maxRow = maxRow + 1;
 			temp.push_back(t);
 		}
@@ -112,18 +112,9 @@ bool Game::init() {
 
 	//astar//astar//astar//astar
 	Astar _a;
-	_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles ,tileAmount);
+	_a.astar(m_tiles[5][2], m_tiles[8][0], m_tiles ,tileAmount);
 	std::cout << "hi" << endl;
 
-
-
-	
-	//std::function<void()>functionPointer = test;
-	//functionPointer = test;
-	//t->addjob(functionPointer);
-
-	//SDL_Thread * thread = NULL;
-	//thread = SDL_CreateThread(_a.astar(m_tiles[0][6], m_tiles[23][3], m_tiles, tileAmount),"thread", NULL);
 	return true;
 	
 }
@@ -154,7 +145,15 @@ void Game::update()
 	for (std::vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); i++) {
 		(*i)->Update(deltaTime);
 	}
-	
+
+	vector< vector<Tile*> >::iterator row;
+	vector<Tile*>::iterator col;
+	for (row = m_tiles.begin(); row != m_tiles.end(); row++) {
+		for (col = row->begin(); col != row->end(); col++) {
+
+			(*col)->Update(deltaTime);
+		}
+	}
 	//save the curent time for next frame
 	lastTime = currentTime;
 }

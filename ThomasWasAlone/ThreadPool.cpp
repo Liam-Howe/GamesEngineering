@@ -46,14 +46,14 @@ void ThreadPool::remove()
 
 NPC * ThreadPool::getJob()
 {
-	SDL_mutexP(_lock);
+	//SDL_mutexP(_lock);
 	if (_enemyQeue.size() > 0)
 	{
 	NPC * temp = _enemyQeue.front();
 	_enemyQeue.pop();
 	return temp;
 	}
-	SDL_mutexV(_lock);
+	//SDL_mutexV(_lock);
 	
 }
 void ThreadPool::addThread()
@@ -69,6 +69,7 @@ void ThreadPool::addThread()
 
 int ThreadPool::worker(void *ptr)
 {
+	
 	while (true)
 	{
 		while (_enemyQeue.size() == 0)
@@ -76,14 +77,15 @@ int ThreadPool::worker(void *ptr)
 
 		}
 		ThreadPool *t = ThreadPool::getInstance();
-		SDL_SemWait(t->getSem());
+	    SDL_SemWait(t->getSem());
 		NPC * npc;
 		npc = t->getJob();
+		
 		SDL_SemPost(t->getSem());
-	//	if (npc != NULL)
-		//{
+		if (npc != NULL)
+		{
 			npc->updateColour();
-		//}
+		}
 	}
 	return 0;
 }

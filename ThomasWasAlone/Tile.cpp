@@ -2,11 +2,13 @@
 #include "Tile.h"
 
 
-Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, int _fCost)
+Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, int _fCost,int row,int coloumn)
 	: m_Pos(pos) , 
 	  m_type(tile),
 	  m_gCost(_gCost),
-	  m_hCost(m_hCost)
+	  m_hCost(m_hCost),
+	  m_row(row),
+	  m_coloumn(coloumn)
 {
 	m_Size.w = _width;
 	m_Size.h = _height;
@@ -37,7 +39,14 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, i
 Tile::~Tile()
 {
 }
-
+int Tile::getRow()
+{
+	return m_row;
+}
+int Tile::getCol()
+{
+	return m_coloumn;
+}
 void Tile::setPrevious(Tile *previous) {
 	m_Previous = previous;
 }
@@ -67,7 +76,7 @@ void Tile::Render(Renderer& r) {
 bool Tile::getMarked() 
 {
 	return marked;
-}
+} 
 
 void Tile::setMarked(bool value)
 {
@@ -75,15 +84,13 @@ void Tile::setMarked(bool value)
 }
 
 
-void Tile::Update(unsigned int deltaTime) {
+void Tile::Update(unsigned int deltaTime) 
+{
 
-	//float angle = angVel*deltaTime / 1000;
-	//Point2D p = rect.pos;//current position
-
-	//					 //apply a rotation about the origin transform
-	//rect.pos.x = (float)cos(angle)*p.x - (float)sin(angle)*p.y;
-	//rect.pos.y = (float)sin(angle)*p.x + (float)cos(angle)*p.y;
-
+	if (marked)
+	{
+		m_col = Colour(0, 0, 255);
+	}
 }
 
 int Tile::getGCost()
