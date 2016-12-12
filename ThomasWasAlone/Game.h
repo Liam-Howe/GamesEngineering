@@ -57,6 +57,7 @@ public:
 	void loop();
 	int npcCount;
 	void onEvent(EventListener::Event);
+	void setupPlayerSpawnZone();
 private:
 	int minX;
 	int maxX;
@@ -64,6 +65,9 @@ private:
 	int maxY;
 	int playerSpawnX;
 	int playerSpawnY;
-	
+	float tileAmount;
+	//float tileCount = tileAmount * tileAmount;
+	float tileWidth;
+	float tileHeight;
 };
 

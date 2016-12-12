@@ -46,10 +46,10 @@ bool Game::init() {
 	ThreadPool *t = ThreadPool::getInstance();
 			
 	//tiles//tiles//tiles
-	float tileAmount = 30;
+	 tileAmount = 30;
 	//float tileCount = tileAmount * tileAmount;
-	float tileWidth = winSize.w / tileAmount;
-	float tileHeight = winSize.h / tileAmount;
+	 tileWidth = winSize.w / tileAmount;
+	 tileHeight = winSize.h / tileAmount;
 	//creates our renderer, which looks after drawing and the window
 	renderer.init(winSize,"Simple SDL App");
 	
@@ -91,20 +91,10 @@ bool Game::init() {
 		pool->addNpc(m_NPCs[i]);
 	}
 	pool->addThread();*/
-	 minX = 0;
-	 maxX = 5;
-     minY = 10;
-	 maxY = 15;
-	playerSpawnZone = Rect(Point2D(m_tiles[maxY+1][minX]->getPosition()), Size2D(tileHeight * 6, -tileHeight *6));
-	srand(time(NULL));
 	
-	//player//player//player
-	playerSpawnX = rand() %(maxY - minY + 1) + minY;
-	playerSpawnY = rand() % (maxX -minX +1) +minX;
-	 _player = new  Player(m_tiles[playerSpawnX][playerSpawnY]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255,0,0));
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
-
+	setupPlayerSpawnZone();
 	//input//input//input
 	lastTime = LTimer::gameTime();
 	//we want this box to respond to REVERSE event
@@ -130,6 +120,21 @@ void Game::test()
 
 }
 
+void Game::setupPlayerSpawnZone() 
+{
+	minX = 0;
+	maxX = 5;
+	minY = 10;
+	maxY = 15;
+	playerSpawnZone = Rect(Point2D(m_tiles[maxY + 1][minX]->getPosition()), Size2D(tileHeight * 6, -tileHeight * 6));
+	srand(time(NULL));
+
+	//player//player//player
+	playerSpawnX = rand() % (maxY - minY + 1) + minY;
+	playerSpawnY = rand() % (maxX - minX + 1) + minX;
+	_player = new  Player(m_tiles[playerSpawnX][playerSpawnY]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255, 0, 0));
+
+}
 
 void Game::destroy()
 {
