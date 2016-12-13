@@ -2,7 +2,7 @@
 #include "Tile.h"
 
 
-Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, int _fCost,int row,int coloumn)
+Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, int _fCost,int coloumn,int row)
 	: m_Pos(pos) , 
 	  m_type(tile),
 	  m_gCost(_gCost),
