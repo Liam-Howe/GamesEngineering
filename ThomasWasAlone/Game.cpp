@@ -49,7 +49,7 @@ bool Game::init() {
 	//tiles//tiles//tiles
 	if (level ==1)
 	{
-		tileAmount = 30;
+		tileAmount = 1000;
 	}
 	else if(level ==2)
 	{
@@ -61,8 +61,10 @@ bool Game::init() {
 	}
 	
 	//float tileCount = tileAmount * tileAmount;
-	 tileWidth = winSize.w / tileAmount;
-	 tileHeight = winSize.h / tileAmount;
+	// tileWidth = winSize.w / tileAmount;
+	// tileHeight = winSize.h / tileAmount;
+	tileWidth = 5;
+	tileHeight = 5;
 	//creates our renderer, which looks after drawing and the window
 	renderer.init(winSize,"Simple SDL App");
 	
@@ -103,12 +105,29 @@ bool Game::init() {
 	}
 
 	 tileSpawn = 0;
-	for (int i = 0; i <= npcCount; i++)
-	{
-		tileSpawn = rand() % 30;
-		NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255),tileSpawn,tileSpawn);
-		m_NPCs.push_back(_temp);
-	}
+	 if (level ==1)
+	 {
+		 for (int i = 0; i <= npcCount; i++)
+		 {
+			 tileSpawn = rand() % 30;
+			 NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight, Colour(255, 255, 255), tileSpawn, tileSpawn);
+			 m_NPCs.push_back(_temp);
+		 }
+
+	 }
+	 else if (level == 2)
+	 {
+		 for (int i = 0; i <= npcCount; i++)
+		 {
+			 tileSpawn = rand() % (70 - 50 + 1) + 50;
+			 tileSpawn = rand() % (70 - 50 + 1) + 50;
+			// tileSpawn = rand() % 30;
+			 NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight, Colour(255, 255, 255), tileSpawn, tileSpawn);
+			 m_NPCs.push_back(_temp);
+		 }
+
+	 }
+	
 
 	//ThreadPool * pool = new ThreadPool();
 	//for (int i = 0; i <= npcCount; i++)
@@ -132,11 +151,11 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::LEFT, this);
 
 	//astar//astar//astar//astar
-	Astar _a;
+	/*Astar _a;
 	for (int i = 0; i <= npcCount ; i++)
 	{
 		m_NPCs[i]->setPath(_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount));	
-    }
+    }*/
 	
 	return true;	
 }

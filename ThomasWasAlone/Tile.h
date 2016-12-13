@@ -19,10 +19,10 @@ public :
 	int getGCost();
 	int getHCost();
 	int getFCost();
-	bool getMarked();
+	/*bool getMarked();*/
 	void setPrevious(Tile *previous);
 	Tile * previous();
-	void setMarked(bool value);
+	/*void setMarked(bool value);*/
 	int getRow();
 	int getCol();
 private:
@@ -35,7 +35,7 @@ private:
 	int m_gCost;
 	int m_hCost;
 	Tile * m_Previous;
-	bool marked;
+	//bool marked;
 	int m_row;
 	int m_coloumn;
 };

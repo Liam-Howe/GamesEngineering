@@ -25,7 +25,7 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, i
 		m_hCost = 0;
 		m_fCost = 0;
 		m_col = Colour(255, 255, 255);
-		marked = false;
+//		marked = false;
 		break;
 	case tileType::WALL:
 		m_col = Colour(100, 100, 100);
@@ -73,24 +73,24 @@ void Tile::Render(Renderer& r) {
 	}
 
 }
-bool Tile::getMarked() 
-{
-	return marked;
-} 
-
-void Tile::setMarked(bool value)
-{
-	marked = value;
-}
-
-
+//bool Tile::getMarked() 
+//{
+//	return marked;
+//} 
+//
+//void Tile::setMarked(bool value)
+//{
+//	marked = value;
+//}
+//
+//
 void Tile::Update(unsigned int deltaTime) 
 {
 
-	if (marked)
+	/*if (marked)
 	{
 		m_col = Colour(0, 0, 255);
-	}
+	}*/
 }
 
 int Tile::getGCost()
