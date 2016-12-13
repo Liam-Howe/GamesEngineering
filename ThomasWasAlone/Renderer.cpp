@@ -20,8 +20,7 @@ Renderer::Renderer():sdl_renderer(NULL)
 }
 
 bool Renderer::init(const Size2D& winSize,const char* title) {
-	 xScalar = 800 / _camera.size.w;
-	 yScalar = 600 / _camera.size.h;
+	
 	int e=SDL_Init(SDL_INIT_EVERYTHING);              // Initialize SDL2
 	windowSize = winSize;
 	if (e != 0) {
@@ -29,7 +28,7 @@ bool Renderer::init(const Size2D& winSize,const char* title) {
 		cout << "Could not init SDL: " << SDL_GetError() << std::endl;
 		return false;
 	}
-	_camera = Rect(0, 0, 400, 200);
+	_camera = Rect(0, 0, 400, 400);
 	// Create an application window with the following settings:
 	window = SDL_CreateWindow(
 		title,                  // window title
@@ -53,43 +52,49 @@ bool Renderer::init(const Size2D& winSize,const char* title) {
 		cout << "Could not create renderer: " << SDL_GetError() << std::endl;
 		return false;
 	}
-	
+	xScalar = 800 / _camera.size.w;
+	yScalar = 800 / _camera.size.h;
 	return true;
 }
 
+void Renderer::moveUp()
+{
+	_camera.pos.y -= 5;
+}
+void Renderer::moveDown()
+{
+	_camera.pos.y += 5;
+}
 void Renderer::moveRight()
 {
-	_camera.pos.y += 1;
-
-
+	_camera.pos.x += 5;
+}
+void Renderer::moveLeft()
+{
+	_camera.pos.x -= 5;
 }
 
 
-//draw a rect in pixel coordinates
+////draw a rect in pixel coordinates
 void Renderer::drawRect(const Rect& r, const Colour& c) {
-	
+
 	SDL_SetRenderDrawColor(sdl_renderer, c.r, c.g, c.b, c.a);
 	SDL_Rect sr;
+	sr.w = (int)r.size.w *xScalar;
 	sr.h = (int)r.size.h *yScalar;
-	sr.w = (int)r.size.w*xScalar;
-	sr.x = (int)r.pos.x - _camera.pos.x;
-	sr.y = (int)r.pos.y - _camera.pos.y;
-	//SDL_RenderFillRect(sdl_renderer, &sr);
+	sr.x = (int)r.pos.x *xScalar - _camera.pos.x;
+	sr.y = (int)r.pos.y*yScalar - _camera.pos.y;
 	SDL_RenderDrawRect(sdl_renderer, &sr);
 
 }//scale = cameraWidth 
 void Renderer::drawFillRect(const Rect& r, const Colour& c) {
 	SDL_SetRenderDrawColor(sdl_renderer, c.r, c.g, c.b, c.a);
 	SDL_Rect sr;
-	float xScalar = 800 / _camera.size.w;
-	float yScalar = 600 / _camera.size.h;
-	sr.h = (int)r.size.h*yScalar;
-	sr.w = (int)r.size.w*xScalar;
-	sr.x = (int)r.pos.x - _camera.pos.x;
-	sr.y = (int)r.pos.y - _camera.pos.y;
-	//SDL_RenderFillRect(sdl_renderer, &sr);
+	sr.h = (int)r.size.h *yScalar;
+	sr.w = (int)r.size.w *xScalar;
+	sr.x = (int)r.pos.x*xScalar - _camera.pos.x;
+	sr.y = (int)r.pos.y*yScalar- _camera.pos.y;
 	SDL_RenderFillRect(sdl_renderer, &sr);
-
 }
 
 //draw a rectin world coordinates

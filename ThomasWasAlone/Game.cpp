@@ -278,7 +278,16 @@ void Game::onEvent(EventListener::Event evt) {
 	}
 	
 	if (evt == EventListener::Event::UP) {
+		renderer.moveUp();
+	}
+	if (evt == EventListener::Event::RIGHT) {
 		renderer.moveRight();
+	}
+	if (evt == EventListener::Event::DOWN) {
+		renderer.moveDown();
+	}
+	if (evt == EventListener::Event::LEFT) {
+		renderer.moveLeft();
 	}
 	
 	if (evt == EventListener::Event::QUIT) {
