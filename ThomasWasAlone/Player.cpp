@@ -17,7 +17,7 @@ Player::~Player()
 {
 }
 
-void Player::Render(Renderer& r) 
+void Player::Render(Renderer& r)
 {
 
 	r.drawFillRect(m_Player, m_Col);

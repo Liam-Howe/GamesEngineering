@@ -34,6 +34,7 @@ Game::~Game()
 
 bool Game::init() {	
 	Size2D winSize(800,800);
+	level = 1;
 	float aspectRatio = winSize.w / winSize.h;
 	float vpWidth = 20;
 	Size2D vpSize(vpWidth, vpWidth /aspectRatio);
@@ -42,11 +43,23 @@ bool Game::init() {
 	Rect vpRect(vpBottomLeft,vpSize);
 	renderer.setViewPort(vpRect);
 	
-	//camera//camera//camera
+	
 	ThreadPool *t = ThreadPool::getInstance();
 			
 	//tiles//tiles//tiles
-	 tileAmount = 30;
+	if (level ==1)
+	{
+		tileAmount = 30;
+	}
+	else if(level ==2)
+	{
+		tileAmount = 100;
+	}
+	else if (level == 3)
+	{
+		tileAmount = 1000;
+	}
+	
 	//float tileCount = tileAmount * tileAmount;
 	 tileWidth = winSize.w / tileAmount;
 	 tileHeight = winSize.h / tileAmount;
@@ -76,7 +89,19 @@ bool Game::init() {
 	}
 
 	//ai//ai//ai//ai//ai
-	 npcCount = 4;
+	if (level == 1)
+	{
+		npcCount = 4;
+	}
+	else if (level == 2)
+	{
+		npcCount = 49;
+	}
+	else if (level == 3)
+	{
+		npcCount = 499;
+	}
+
 	 tileSpawn = 0;
 	for (int i = 0; i <= npcCount; i++)
 	{
@@ -85,12 +110,12 @@ bool Game::init() {
 		m_NPCs.push_back(_temp);
 	}
 
-	/*ThreadPool * pool = new ThreadPool();
-	for (int i = 0; i <= npcCount; i++)
-	{
-		pool->addNpc(m_NPCs[i]);
-	}
-	pool->addThread();*/
+	//ThreadPool * pool = new ThreadPool();
+	//for (int i = 0; i <= npcCount; i++)
+	//{
+	//	pool->addNpc(m_NPCs[i]);
+	//}
+	//pool->addThread();
 	
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
@@ -110,15 +135,10 @@ bool Game::init() {
 	Astar _a;
 	for (int i = 0; i <= npcCount ; i++)
 	{
-		_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount);
-		//_a.astar(m_NPCs[0]->getRow(), m_NPCs[0]->getCol(),10,10, m_tiles, tileAmount);
-		//_a.astar(10, 15, 10, 10, m_tiles, tileAmount);
+		m_NPCs[i]->setPath(_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount));	
     }
-	//_a.astar(1,1, m_tiles[2][2], m_tiles[29][29], m_tiles, tileAmount);
-	//std::cout << "hi" << endl;
-	//_a.astar(22, 22, 10, 10, m_tiles, tileAmount);
-	return true;
 	
+	return true;	
 }
 void Game::test()
 {
@@ -163,6 +183,8 @@ void Game::update()
 		(*i)->Update(deltaTime);
 	}*/
 
+	//moveAI();
+
 	vector< vector<Tile*> >::iterator row;
 	vector<Tile*>::iterator col;
 	for (row = m_tiles.begin(); row != m_tiles.end(); row++) {
@@ -176,6 +198,17 @@ void Game::update()
 	lastTime = currentTime;
 }
 
+
+void Game::moveAI()
+{
+	for (int i = 0; i < m_NPCs.size(); i++)
+	{
+		for (int t = 0; t < m_NPCs[i]->getPath().size(); t++)
+		{
+			m_NPCs[i]->setPosition(m_NPCs[i]->getPath().at(t)->getPosition());// , m_NPCs[i]->getPath()[0]->getPosition().y);
+		}
+	}
+}
 //** calls render on all game entities*/
 
 void Game::render()
@@ -189,13 +222,13 @@ void Game::render()
 			(*col)->Render(renderer);
 		}
 	}
-
+	
 	for (std::vector<NPC*>::iterator i = m_NPCs.begin(), e = m_NPCs.end(); i != e; i++) {
 		(*i)->Render(renderer);
 	}
 	renderer.drawRect(playerSpawnZone, Colour(0, 255, 0));
-	
 	_player->Render(renderer);
+	
 	
 	renderer.present();// display the new frame (swap buffers)	
 }
@@ -242,6 +275,10 @@ void Game::onEvent(EventListener::Event evt) {
 
 	if (evt == EventListener::Event::PAUSE) {
 		pause = !pause;
+	}
+	
+	if (evt == EventListener::Event::UP) {
+		renderer.moveRight();
 	}
 	
 	if (evt == EventListener::Event::QUIT) {

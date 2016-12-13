@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-
+#include "Tile.h"
 class NPC : public GameObject
 {
 public:
@@ -12,6 +12,11 @@ public:
 	Point2D getPosition();
 	int getRow();
 	int getCol();
+	void setRow(int row);
+	void setCol(int col);
+	void setPosition(Point2D _pos);
+	std::vector<Tile*> getPath();
+	void setPath(std::vector<Tile*>);
 private:
 	Point2D m_Pos;
 	Size2D m_Size;
@@ -19,6 +24,7 @@ private:
 	Colour m_col;
 	int m_Row;
 	int m_coloumn;
+	std::vector<Tile*> m_path;
 
 };
 

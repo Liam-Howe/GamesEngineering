@@ -25,13 +25,14 @@ class Game:public EventListener
 	bool pause;
 	bool quit;
 
-	SDL_Rect _camera;
+	
 	//camera atributes
 	const int m_screen_Width = 640;
 	const int m_screen_Height = 480;
 	const int m_fps = 20;
 	SDL_Thread * thread;
 	void test();
+	void moveAI();
 
 public:
 	Game();
@@ -69,5 +70,6 @@ private:
 	//float tileCount = tileAmount * tileAmount;
 	float tileWidth;
 	float tileHeight;
+	int level;
 };
 

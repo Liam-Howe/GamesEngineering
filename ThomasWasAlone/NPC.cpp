@@ -38,16 +38,39 @@ Point2D NPC::getPosition()
 	return m_Pos;
 }
 
-void NPC::Render(Renderer & r) {
+void NPC::Render(Renderer & r) 
+{
 	r.drawFillRect(*m_Rect, m_col);
 }
-int NPC::getRow() {
-
+int NPC::getRow()
+{
 	return m_Row;
 }
-int NPC::getCol() {
-
+int NPC::getCol() 
+{
 	return m_coloumn;
+}
+void NPC::setPath(std::vector<Tile*>p) 
+{
+	m_path = p;
+}
 
+std::vector<Tile*> NPC::getPath()
+{
+	return m_path;
+}
+void NPC::setPosition(Point2D _pos) 
+{
+	m_Rect->pos.x = _pos.x;
+	m_Rect->pos.y = _pos.y;
+	//m_Pos = _pos;
+}
 
+void NPC::setRow(int row)
+{
+	m_Row = row;
+}
+void NPC::setCol(int col)
+{
+	m_coloumn = col;
 }

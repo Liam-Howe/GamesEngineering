@@ -20,7 +20,8 @@ Renderer::Renderer():sdl_renderer(NULL)
 }
 
 bool Renderer::init(const Size2D& winSize,const char* title) {
-
+	 xScalar = 800 / _camera.size.w;
+	 yScalar = 600 / _camera.size.h;
 	int e=SDL_Init(SDL_INIT_EVERYTHING);              // Initialize SDL2
 	windowSize = winSize;
 	if (e != 0) {
@@ -28,7 +29,7 @@ bool Renderer::init(const Size2D& winSize,const char* title) {
 		cout << "Could not init SDL: " << SDL_GetError() << std::endl;
 		return false;
 	}
-
+	_camera = Rect(0, 0, 400, 200);
 	// Create an application window with the following settings:
 	window = SDL_CreateWindow(
 		title,                  // window title
@@ -56,25 +57,36 @@ bool Renderer::init(const Size2D& winSize,const char* title) {
 	return true;
 }
 
+void Renderer::moveRight()
+{
+	_camera.pos.y += 1;
+
+
+}
+
+
 //draw a rect in pixel coordinates
 void Renderer::drawRect(const Rect& r, const Colour& c) {
+	
 	SDL_SetRenderDrawColor(sdl_renderer, c.r, c.g, c.b, c.a);
 	SDL_Rect sr;
-	sr.h = (int)r.size.h;
-	sr.w = (int)r.size.w;
-	sr.x = (int)r.pos.x;
-	sr.y = (int)r.pos.y;
+	sr.h = (int)r.size.h *yScalar;
+	sr.w = (int)r.size.w*xScalar;
+	sr.x = (int)r.pos.x - _camera.pos.x;
+	sr.y = (int)r.pos.y - _camera.pos.y;
 	//SDL_RenderFillRect(sdl_renderer, &sr);
 	SDL_RenderDrawRect(sdl_renderer, &sr);
 
-}
+}//scale = cameraWidth 
 void Renderer::drawFillRect(const Rect& r, const Colour& c) {
 	SDL_SetRenderDrawColor(sdl_renderer, c.r, c.g, c.b, c.a);
 	SDL_Rect sr;
-	sr.h = (int)r.size.h;
-	sr.w = (int)r.size.w;
-	sr.x = (int)r.pos.x;
-	sr.y = (int)r.pos.y;
+	float xScalar = 800 / _camera.size.w;
+	float yScalar = 600 / _camera.size.h;
+	sr.h = (int)r.size.h*yScalar;
+	sr.w = (int)r.size.w*xScalar;
+	sr.x = (int)r.pos.x - _camera.pos.x;
+	sr.y = (int)r.pos.y - _camera.pos.y;
 	//SDL_RenderFillRect(sdl_renderer, &sr);
 	SDL_RenderFillRect(sdl_renderer, &sr);
 
