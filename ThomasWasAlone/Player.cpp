@@ -3,10 +3,12 @@
 
 
 
-Player::Player(Point2D _pos, Size2D _Size, Colour _col) 
+Player::Player(Point2D _pos, Size2D _Size, Colour _col,int _row, int _coloumn)
 	: m_Pos(_pos), 
       m_Size(_Size),
-	m_Col(_col)
+	m_Col(_col),
+	m_Row(_row),
+	m_Coloumn(_coloumn)
 {
 	m_Player =  Rect(Point2D(m_Pos.x,m_Pos.y), Size2D(m_Size.w,m_Size.h));
 }
@@ -41,6 +43,16 @@ void Player::move(Point2D dir)
 		m_Player
 	}*/
 
+}
+int  Player::getRow()
+{
+
+	return m_Row;
+}
+int  Player::getCol()
+{
+
+	return m_Coloumn;
 }
 
 void Player::Update(unsigned int deltaTime) {

@@ -10,7 +10,7 @@ class Astar {
 
 public:
 
-	void astar(Tile *startNode, Tile *goalNode, std::vector<std::vector<Tile*>>&tiles, int tileAmount);
+	std::vector<Tile*> astar(int row ,int col, int _gRow,int _gCol, std::vector<std::vector<Tile*>>&tiles, int tileAmount);
 	//void calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector<Tile*>>&tiles, int tileAmount,Tile * goalNode);
 	 void calculateSurroundingNodes(Tile * currentNode,std::vector<std::vector<Tile*>>&tiles, int tileAmount);
 	 int calculateFCost(Tile * n1, Tile * n2);

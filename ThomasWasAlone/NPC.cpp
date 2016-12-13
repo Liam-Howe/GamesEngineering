@@ -2,9 +2,11 @@
 #include "NPC.h"
 #include <iostream>
 
-NPC::NPC(Point2D _Pos,float  _tileWidth,float  _tileHeight, Colour _colour) 
+NPC::NPC(Point2D _Pos,float  _tileWidth,float  _tileHeight, Colour _colour, int row, int col) 
 	: m_Pos(_Pos) ,
-	m_col(_colour)
+	m_col(_colour),
+	m_Row(row),
+	m_coloumn(col)
 {
 	m_Size.w = _tileWidth;
 	m_Size.h = _tileHeight;
@@ -30,6 +32,22 @@ void NPC::Update(unsigned int deltaTime)
 
 }
 
+Point2D NPC::getPosition()
+{
+
+	return m_Pos;
+}
+
 void NPC::Render(Renderer & r) {
 	r.drawFillRect(*m_Rect, m_col);
+}
+int NPC::getRow() {
+
+	return m_Row;
+}
+int NPC::getCol() {
+
+	return m_coloumn;
+
+
 }

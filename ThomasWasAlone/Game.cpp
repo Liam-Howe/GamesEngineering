@@ -81,7 +81,7 @@ bool Game::init() {
 	for (int i = 0; i <= npcCount; i++)
 	{
 		tileSpawn = rand() % 30;
-		NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255));
+		NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight,Colour(255,255,255),tileSpawn,tileSpawn);
 		m_NPCs.push_back(_temp);
 	}
 
@@ -108,9 +108,15 @@ bool Game::init() {
 
 	//astar//astar//astar//astar
 	Astar _a;
-	_a.astar(m_tiles[0][0], m_tiles[29][29], m_tiles ,tileAmount);
+	for (int i = 0; i <= npcCount ; i++)
+	{
+		_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount);
+		//_a.astar(m_NPCs[0]->getRow(), m_NPCs[0]->getCol(),10,10, m_tiles, tileAmount);
+		//_a.astar(10, 15, 10, 10, m_tiles, tileAmount);
+    }
+	//_a.astar(1,1, m_tiles[2][2], m_tiles[29][29], m_tiles, tileAmount);
 	//std::cout << "hi" << endl;
-
+	//_a.astar(22, 22, 10, 10, m_tiles, tileAmount);
 	return true;
 	
 }
@@ -132,7 +138,7 @@ void Game::setupPlayerSpawnZone()
 	//player//player//player
 	playerSpawnX = rand() % (maxY - minY + 1) + minY;
 	playerSpawnY = rand() % (maxX - minX + 1) + minX;
-	_player = new  Player(m_tiles[playerSpawnX][playerSpawnY]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255, 0, 0));
+	_player = new  Player(m_tiles[playerSpawnX][playerSpawnY]->getPosition(), Size2D(tileWidth, tileHeight), Colour(255, 0, 0),playerSpawnX,playerSpawnY);
 
 }
 
