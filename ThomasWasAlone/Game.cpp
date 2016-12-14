@@ -49,7 +49,7 @@ bool Game::init() {
 	//tiles//tiles//tiles
 	if (level ==1)
 	{
-		tileAmount = 1000;
+		tileAmount = 100;
 	}
 	else if(level ==2)
 	{
