@@ -59,10 +59,10 @@ std::vector<Tile*> Astar::astar(int row ,int col,int _gRow,int _gCol, std::vecto
 		}
 
 	}
-	/*for (int i = 0; i < m_closedList.size(); i++)
+	for (int i = 0; i < m_closedList.size(); i++)
 	{
-		m_closedList[i]->setMarked(true);
-	}*/
+		m_closedList[i]->setColour(Colour(0,0,255));
+	}
 	return m_closedList;
 }
 

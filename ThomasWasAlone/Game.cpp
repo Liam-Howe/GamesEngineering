@@ -33,8 +33,26 @@ Game::~Game()
 
 
 bool Game::init() {	
-	Size2D winSize(800,800);
 	level = 1;
+	Size2D winSize(600, 600);
+	if (level == 1)
+	{
+		tileAmount = 30;
+	
+	}
+	else if (level == 2)
+	{
+		tileAmount = 100;
+		//winSize(800, 800);
+	}
+	else if (level == 3)
+	{
+		tileAmount = 1000;
+		//winSize(800, 800);
+	}
+	
+	_camera = new Rect(0, 0, winSize.w, winSize.h);
+	
 	float aspectRatio = winSize.w / winSize.h;
 	float vpWidth = 20;
 	Size2D vpSize(vpWidth, vpWidth /aspectRatio);
@@ -47,24 +65,13 @@ bool Game::init() {
 	ThreadPool *t = ThreadPool::getInstance();
 			
 	//tiles//tiles//tiles
-	if (level ==1)
-	{
-		tileAmount = 100;
-	}
-	else if(level ==2)
-	{
-		tileAmount = 100;
-	}
-	else if (level == 3)
-	{
-		tileAmount = 1000;
-	}
+	
 	
 	//float tileCount = tileAmount * tileAmount;
 	// tileWidth = winSize.w / tileAmount;
 	// tileHeight = winSize.h / tileAmount;
-	tileWidth = 5;
-	tileHeight = 5;
+	tileWidth = 25;
+	tileHeight = 25;
 	//creates our renderer, which looks after drawing and the window
 	renderer.init(winSize,"Simple SDL App");
 	
@@ -127,18 +134,22 @@ bool Game::init() {
 		 }
 
 	 }
-	
-
+	 setupPlayerSpawnZone();
+	 ThreadPool *tp = ThreadPool::getInstance();
+	 ThreadPool::getInstance()->setPlayer(_player);
+	 ThreadPool::getInstance()->setAI(m_tiles);
+	 ThreadPool::getInstance()->setTileAmount(tileAmount);
 	//ThreadPool * pool = new ThreadPool();
-	//for (int i = 0; i <= npcCount; i++)
-	//{
-	//	pool->addNpc(m_NPCs[i]);
-	//}
-	//pool->addThread();
+	
+	for (int i = 0; i <= npcCount; i++)
+	{
+		tp->addNpc(m_NPCs[i]);
+	}
+	tp->addThread();
 	
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
-	setupPlayerSpawnZone();
+
 	//input//input//input
 	lastTime = LTimer::gameTime();
 	//we want this box to respond to REVERSE event
@@ -204,14 +215,7 @@ void Game::update()
 
 	//moveAI();
 
-	vector< vector<Tile*> >::iterator row;
-	vector<Tile*>::iterator col;
-	for (row = m_tiles.begin(); row != m_tiles.end(); row++) {
-		for (col = row->begin(); col != row->end(); col++) {
 
-			(*col)->Update(deltaTime);
-		}
-	}
 	
 	//save the curent time for next frame
 	lastTime = currentTime;
@@ -233,20 +237,30 @@ void Game::moveAI()
 void Game::render()
 {
 	renderer.clear(Colour(0,0,0));// prepare for new frame
-	vector< vector<Tile*> >::iterator row;
-	vector<Tile*>::iterator col;
-	for (row = m_tiles.begin(); row != m_tiles.end(); row++) {
-		for (col = row->begin(); col != row->end(); col++) {
-		
-			(*col)->Render(renderer);
+	//vector< vector<Tile*> >::iterator row;
+	//vector<Tile*>::iterator col;
+	//for (row = m_tiles.begin(); row != m_tiles.end(); row++) {
+	//	for (col = row->begin(); col != row->end(); col++) {
+	//	
+	//		(*col)->Render(renderer);
+	//	}
+	//}
+
+
+	for (int row = _camera->pos.y; row < (_camera->size.h/tileHeight); row++)
+	{
+		for (int col = _camera->pos.x; col < (_camera->size.w / tileWidth); col++)
+		{
+			m_tiles[row][col]->Render(renderer, _camera->pos);
 		}
+
 	}
 	
 	for (std::vector<NPC*>::iterator i = m_NPCs.begin(), e = m_NPCs.end(); i != e; i++) {
-		(*i)->Render(renderer);
+		(*i)->Render(renderer,_camera->pos);
 	}
-	renderer.drawRect(playerSpawnZone, Colour(0, 255, 0));
-	_player->Render(renderer);
+	//renderer.drawRect(Rect(playerSpawnZone), Colour(0, 255, 0));
+	_player->Render(renderer, _camera->pos);
 	
 	
 	renderer.present();// display the new frame (swap buffers)	
@@ -297,16 +311,16 @@ void Game::onEvent(EventListener::Event evt) {
 	}
 	
 	if (evt == EventListener::Event::UP) {
-		renderer.moveUp();
+		moveUp();
 	}
 	if (evt == EventListener::Event::RIGHT) {
-		renderer.moveRight();
+	     moveRight();
 	}
 	if (evt == EventListener::Event::DOWN) {
-		renderer.moveDown();
+		moveDown();
 	}
 	if (evt == EventListener::Event::LEFT) {
-		renderer.moveLeft();
+		moveLeft();
 	}
 	
 	if (evt == EventListener::Event::QUIT) {
@@ -314,3 +328,28 @@ void Game::onEvent(EventListener::Event evt) {
 	}
 
 }
+
+void Game::moveUp()
+{
+	if (_camera->pos.y  > 0)
+	{
+		_camera->pos.y -= 1;
+	}	
+}
+void Game::moveDown()
+{
+	_camera->pos.y += 1;
+}
+void Game::moveRight()
+{
+	_camera->pos.x += 1;
+}
+void Game::moveLeft()
+{
+	if (_camera->pos.x >0)
+	{
+		_camera->pos.x -= 1;
+	}
+
+}
+

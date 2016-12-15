@@ -8,7 +8,7 @@ public :
 
 	Player(Point2D _pos, Size2D _Size, Colour _col,int _row , int _coloumn);
 	~Player();
-	void Render(Renderer & r);
+	void Render(Renderer & r, Point2D _cameraPos);
 	void Update(unsigned int deltaTime);
 	void move(Point2D dir);
 	int getRow();

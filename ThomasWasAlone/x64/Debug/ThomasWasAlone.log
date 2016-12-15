@@ -1,4 +1,7 @@
 ﻿  Game.cpp
-c:\users\liam\pictures\gamesengineering\thomaswasalone\game.cpp(175): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  ThomasWasAlone.vcxproj -> C:\Users\Liam\Pictures\GamesEngineering\x64\Debug\SDL_Starter_app.exe
-  ThomasWasAlone.vcxproj -> C:\Users\Liam\Pictures\GamesEngineering\x64\Debug\SDL_Starter_app.pdb (Full PDB)
+c:\users\liam\videos\gamesengineering\thomaswasalone\game.cpp(141): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\liam\videos\gamesengineering\thomaswasalone\game.cpp(186): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\liam\videos\gamesengineering\thomaswasalone\game.cpp(250): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\liam\videos\gamesengineering\thomaswasalone\game.cpp(252): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  ThomasWasAlone.vcxproj -> C:\Users\Liam\Videos\GamesEngineering\x64\Debug\SDL_Starter_app.exe
+  ThomasWasAlone.vcxproj -> C:\Users\Liam\Videos\GamesEngineering\x64\Debug\SDL_Starter_app.pdb (Full PDB)

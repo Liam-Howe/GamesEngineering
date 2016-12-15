@@ -13,7 +13,7 @@ public:
 	GameObject() {};
 	virtual ~GameObject() {};
 
-	virtual void Render(Renderer& r)=0;
+	virtual void Render(Renderer& r, Point2D _cameraPos)=0;
 	virtual void Update(unsigned int deltaTime)=0;
 
 

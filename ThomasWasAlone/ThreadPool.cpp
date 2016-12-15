@@ -69,7 +69,7 @@ void ThreadPool::addThread()
 
 int ThreadPool::worker(void *ptr)
 {
-	
+	 
 	while (true)
 	{
 		while (_enemyQeue.size() == 0)
@@ -77,6 +77,7 @@ int ThreadPool::worker(void *ptr)
 
 		}
 		ThreadPool *t = ThreadPool::getInstance();
+		
 	    SDL_SemWait(t->getSem());
 		NPC * npc;
 		npc = t->getJob();
@@ -84,7 +85,9 @@ int ThreadPool::worker(void *ptr)
 		SDL_SemPost(t->getSem());
 		if (npc != NULL)
 		{
-			npc->updateColour();
+			Astar a;
+			//_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount)
+			npc->setPath(a.astar(npc->getRow(),npc->getCol(), ThreadPool::getInstance()->getPlayer().getRow(), ThreadPool::getInstance()->getPlayer().getCol(), ThreadPool::getInstance()->getTiles(), ThreadPool::getInstance()->getTileAmount()));
 		}
 	}
 	return 0;
@@ -97,4 +100,31 @@ SDL_sem * ThreadPool::getSem()
 SDL_mutex * ThreadPool::getLock()
 {
 	return _lock;
+}
+void ThreadPool::setPlayer(Player * p)
+{
+	_p = p;
+
+}
+void ThreadPool::setAI(std::vector<std::vector<Tile*>>tiles)
+{
+	_tiles = tiles;
+
+}
+Player ThreadPool::getPlayer() 
+{
+	return *_p;
+}
+std::vector<std::vector<Tile*>> ThreadPool::getTiles()
+{
+
+	return _tiles;
+}
+void ThreadPool::setTileAmount(int _tileAmount) 
+{
+	tileAmount = _tileAmount;
+}
+int ThreadPool::getTileAmount()
+{
+	return tileAmount;
 }

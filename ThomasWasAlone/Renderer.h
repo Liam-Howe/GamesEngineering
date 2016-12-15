@@ -36,15 +36,9 @@ public:
 	Rect worldToScreen(const Rect&);
 	void drawFillRect(const Rect& r, const Colour& c);
 	void setViewPort(const Rect&);
-	void moveRight();
-	void moveUp();
-	void moveLeft();
-	void moveDown();
+
 	void destroy();
 	~Renderer();
-private :
-	float xScalar;
-	float yScalar;
-	Rect _camera;
+
 };
 

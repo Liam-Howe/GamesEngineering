@@ -17,10 +17,10 @@ Player::~Player()
 {
 }
 
-void Player::Render(Renderer& r)
+void Player::Render(Renderer& r, Point2D _cameraPos)
 {
 
-	r.drawFillRect(m_Player, m_Col);
+	r.drawFillRect(Rect(m_Player.pos.x - _cameraPos.x *m_Player.size.w,m_Player.pos.y - _cameraPos.y*m_Player.size.h,m_Player.size.w,m_Player.size.h), m_Col);
 
 }
 

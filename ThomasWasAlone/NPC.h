@@ -6,7 +6,7 @@ class NPC : public GameObject
 public:
 	NPC(Point2D _Pos,float _tileWidth ,float _tileHeight, Colour _colour, int row ,int col);
 	~NPC();
-	void Render(Renderer & r);
+	void Render(Renderer & r, Point2D _cameraPos);
 	void Update(unsigned int deltaTime);
 	void updateColour();
 	Point2D getPosition();

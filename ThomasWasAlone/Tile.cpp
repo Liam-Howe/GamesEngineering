@@ -55,20 +55,21 @@ Tile * Tile::previous()
 	return m_Previous;
 }
 
-void Tile::Render(Renderer& r) {
+void Tile::Render(Renderer& r, Point2D _cameraPos)
+{
 	switch (m_type)
-	{
+	{//rect.pos.x -cameraOffsetX,rect.pos.y-cameraOffsetY,rect.size.w,rect.size.h
 	case tileType::START:
-		r.drawFillRect(_Rect, m_col);
+		r.drawFillRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w,_Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w,_Rect.size.h), m_col);
 		break;
 	case tileType::TILE:
-		r.drawRect(_Rect, m_col);
+		r.drawRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w, _Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w, _Rect.size.h), m_col);
 		break;
 	case tileType::WALL:
-		r.drawFillRect(_Rect, m_col);
+		r.drawFillRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w, _Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w, _Rect.size.h), m_col);
 		break;
 	case tileType::GOAL:
-		r.drawFillRect(_Rect, m_col);
+		r.drawFillRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w, _Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w, _Rect.size.h), m_col);
 		break;
 	}
 
@@ -84,6 +85,13 @@ void Tile::Render(Renderer& r) {
 //}
 //
 //
+
+void Tile::setColour(Colour _col)
+{
+
+	m_col = _col;
+
+}
 void Tile::Update(unsigned int deltaTime) 
 {
 

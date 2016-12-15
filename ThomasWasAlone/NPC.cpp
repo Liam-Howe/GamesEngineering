@@ -38,10 +38,11 @@ Point2D NPC::getPosition()
 	return m_Pos;
 }
 
-void NPC::Render(Renderer & r) 
+void NPC::Render(Renderer & r, Point2D _cameraPos)
 {
-	r.drawFillRect(*m_Rect, m_col);
+	r.drawFillRect(Rect(m_Rect->pos.x - _cameraPos.x *m_Rect->size.w, m_Rect->pos.y - _cameraPos.y*m_Rect->size.h, m_Rect->size.w, m_Rect->size.h), m_col);
 }
+
 int NPC::getRow()
 {
 	return m_Row;

@@ -33,7 +33,7 @@ class Game:public EventListener
 	SDL_Thread * thread;
 	void test();
 	void moveAI();
-
+	
 public:
 	Game();
 	~Game();
@@ -59,6 +59,10 @@ public:
 	int npcCount;
 	void onEvent(EventListener::Event);
 	void setupPlayerSpawnZone();
+	void moveRight();
+	void moveUp();
+	void moveLeft();
+	void moveDown();
 private:
 	int minX;
 	int maxX;
@@ -71,5 +75,6 @@ private:
 	float tileWidth;
 	float tileHeight;
 	int level;
+	Rect* _camera;
 };
 
