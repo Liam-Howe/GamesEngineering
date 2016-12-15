@@ -1,25 +1,27 @@
-﻿  Astar.cpp
+﻿  stdafx.cpp
+  Astar.cpp
 Astar.cpp(17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 Astar.cpp(18): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 Astar.cpp(23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 Astar.cpp(24): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 Astar.cpp(26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  NPC.cpp
+  Player.cpp
   Game.cpp
 Game.cpp(159): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 Game.cpp(205): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-Game.cpp(383): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-Game.cpp(385): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Game.cpp(398): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Game.cpp(400): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   InputManager.cpp
   LTimer.cpp
-  NPC.cpp
-  Player.cpp
   Renderer.cpp
   SDL_Starter_app.cpp
   ThreadPool.cpp
+  Tile.cpp
   Generating code
-  219 of 833 functions (26.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    20 functions had inline decision re-evaluated but remain unchanged
+  835 of 837 functions (99.8%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  ThomasWasAlone.vcxproj -> C:\Users\Liam\Pictures\GamesEngineering\x64\Release\SDL_Starter_app.exe
-  ThomasWasAlone.vcxproj -> C:\Users\Liam\Pictures\GamesEngineering\x64\Release\SDL_Starter_app.pdb (Full PDB)
+  ThomasWasAlone.vcxproj -> C:\Users\Liam\Desktop\GamesEngineering\x64\Release\SDL_Starter_app.exe
+  ThomasWasAlone.vcxproj -> C:\Users\Liam\Desktop\GamesEngineering\x64\Release\SDL_Starter_app.pdb (Full PDB)

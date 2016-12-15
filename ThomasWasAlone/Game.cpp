@@ -14,7 +14,7 @@ using namespace std;
 #include "Astar.h"
 #include "ThreadPool.h"
 #include <functional>
-const int SCREEN_FPS = 100;
+const int SCREEN_FPS = 1000;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
 

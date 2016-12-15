@@ -1,8 +1,9 @@
 //  Defines the entry point for the console application.
 //
 #include "stdafx.h"
-
+#pragma comment(lib,"SDL2.lib") 
 #include <iostream>
+
 using namespace std;
 #include "Game.h"
 
