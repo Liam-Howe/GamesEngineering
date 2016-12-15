@@ -1,0 +1,12 @@
+﻿  Game.cpp
+Game.cpp(186): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+Game.cpp(205): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+Game.cpp(383): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Game.cpp(385): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Generating code
+  64 of 682 functions ( 9.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    19 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ThomasWasAlone.vcxproj -> C:\Users\Liam\Pictures\GamesEngineering\x64\Release\SDL_Starter_app.exe
+  ThomasWasAlone.vcxproj -> C:\Users\Liam\Pictures\GamesEngineering\x64\Release\SDL_Starter_app.pdb (Full PDB)

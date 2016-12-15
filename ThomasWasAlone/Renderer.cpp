@@ -20,7 +20,7 @@ Renderer::Renderer():sdl_renderer(NULL)
 }
 
 bool Renderer::init(const Size2D& winSize,const char* title) {
-
+	
 	int e=SDL_Init(SDL_INIT_EVERYTHING);              // Initialize SDL2
 	windowSize = winSize;
 	if (e != 0) {
@@ -56,18 +56,23 @@ bool Renderer::init(const Size2D& winSize,const char* title) {
 	return true;
 }
 
-//draw a rect in pixel coordinates
+
+
+////draw a rect in pixel coordinates
 void Renderer::drawRect(const Rect& r, const Colour& c) {
+
 	SDL_SetRenderDrawColor(sdl_renderer, c.r, c.g, c.b, c.a);
 	SDL_Rect sr;
-	sr.h = (int)r.size.h;
 	sr.w = (int)r.size.w;
+	sr.h = (int)r.size.h;
 	sr.x = (int)r.pos.x;
 	sr.y = (int)r.pos.y;
-	//SDL_RenderFillRect(sdl_renderer, &sr);
+	
 	SDL_RenderDrawRect(sdl_renderer, &sr);
 
-}
+	
+
+}//scale = cameraWidth 
 void Renderer::drawFillRect(const Rect& r, const Colour& c) {
 	SDL_SetRenderDrawColor(sdl_renderer, c.r, c.g, c.b, c.a);
 	SDL_Rect sr;
@@ -75,9 +80,10 @@ void Renderer::drawFillRect(const Rect& r, const Colour& c) {
 	sr.w = (int)r.size.w;
 	sr.x = (int)r.pos.x;
 	sr.y = (int)r.pos.y;
-	//SDL_RenderFillRect(sdl_renderer, &sr);
+	
 	SDL_RenderFillRect(sdl_renderer, &sr);
-
+	
+	
 }
 
 //draw a rectin world coordinates

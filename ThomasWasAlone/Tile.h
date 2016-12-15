@@ -7,9 +7,9 @@ class Tile: public GameObject {
 
 public :
 
-	Tile(Point2D pos, float _width, float _height, tileType tile,int _gCost, int _fCost);
+	Tile(Point2D pos, float _width, float _height, tileType tile,int _gCost, int _fCost,int row,int coloumn);
 	~Tile();
-	void Render(Renderer & r);
+	void Render(Renderer & r,Point2D _cameraPos);
 	void Update(unsigned int deltaTime);
 	Point2D getPosition();
 	Rect getRect();
@@ -23,6 +23,10 @@ public :
 	void setPrevious(Tile *previous);
 	Tile * previous();
 	void setMarked(bool value);
+	int getRow();
+	int getCol();
+	void setColour(Colour _col);
+	void setType(tileType);
 private:
 	Rect _Rect;
 	Point2D m_Pos;
@@ -34,4 +38,6 @@ private:
 	int m_hCost;
 	Tile * m_Previous;
 	bool marked;
+	int m_row;
+	int m_coloumn;
 };

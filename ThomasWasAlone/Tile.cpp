@@ -2,11 +2,13 @@
 #include "Tile.h"
 
 
-Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, int _fCost)
+Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, int _fCost,int coloumn,int row)
 	: m_Pos(pos) , 
 	  m_type(tile),
 	  m_gCost(_gCost),
-	  m_hCost(m_hCost)
+	  m_hCost(m_hCost),
+	  m_row(row),
+	  m_coloumn(coloumn)
 {
 	m_Size.w = _width;
 	m_Size.h = _height;
@@ -23,10 +25,10 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, i
 		m_hCost = 0;
 		m_fCost = 0;
 		m_col = Colour(255, 255, 255);
-		marked = false;
+//		marked = false;
 		break;
 	case tileType::WALL:
-		m_col = Colour(100, 100, 100);
+		m_col = Colour(255, 0, 255);
 		break;
 	case tileType::GOAL:
 		m_col = Colour(0, 0, 0);
@@ -37,7 +39,14 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, i
 Tile::~Tile()
 {
 }
-
+int Tile::getRow()
+{
+	return m_row;
+}
+int Tile::getCol()
+{
+	return m_coloumn;
+}
 void Tile::setPrevious(Tile *previous) {
 	m_Previous = previous;
 }
@@ -46,20 +55,21 @@ Tile * Tile::previous()
 	return m_Previous;
 }
 
-void Tile::Render(Renderer& r) {
+void Tile::Render(Renderer& r, Point2D _cameraPos)
+{
 	switch (m_type)
 	{
 	case tileType::START:
-		r.drawFillRect(_Rect, m_col);
+		r.drawFillRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w,_Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w,_Rect.size.h), m_col);
 		break;
 	case tileType::TILE:
-		r.drawRect(_Rect, m_col);
+		r.drawRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w, _Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w, _Rect.size.h), m_col);
 		break;
 	case tileType::WALL:
-		r.drawFillRect(_Rect, m_col);
+		r.drawFillRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w, _Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w, _Rect.size.h), m_col);
 		break;
 	case tileType::GOAL:
-		r.drawFillRect(_Rect, m_col);
+		r.drawFillRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w, _Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w, _Rect.size.h), m_col);
 		break;
 	}
 
@@ -67,7 +77,7 @@ void Tile::Render(Renderer& r) {
 bool Tile::getMarked() 
 {
 	return marked;
-}
+} 
 
 void Tile::setMarked(bool value)
 {
@@ -75,15 +85,26 @@ void Tile::setMarked(bool value)
 }
 
 
-void Tile::Update(unsigned int deltaTime) {
 
-	//float angle = angVel*deltaTime / 1000;
-	//Point2D p = rect.pos;//current position
+void Tile::setColour(Colour _col)
+{
 
-	//					 //apply a rotation about the origin transform
-	//rect.pos.x = (float)cos(angle)*p.x - (float)sin(angle)*p.y;
-	//rect.pos.y = (float)sin(angle)*p.x + (float)cos(angle)*p.y;
+	m_col = _col;
 
+}
+
+void Tile::setType(tileType type)
+{
+	m_type = type;
+	m_col = Colour(255, 0, 255);
+}
+void Tile::Update(unsigned int deltaTime) 
+{
+
+	if (marked)
+	{
+		m_col = Colour(0, 0, 255);
+	}
 }
 
 int Tile::getGCost()

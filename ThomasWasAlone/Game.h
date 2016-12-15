@@ -9,6 +9,7 @@
 #include "Tile.h"
 #include "Player.h"
 #include "NPC.h"
+#include "SDL_thread.h"
 
 using namespace std;
 /** The game objct whic manages the game loop*/
@@ -24,13 +25,15 @@ class Game:public EventListener
 	bool pause;
 	bool quit;
 
-	SDL_Rect _camera;
+	
 	//camera atributes
 	const int m_screen_Width = 640;
 	const int m_screen_Height = 480;
 	const int m_fps = 20;
-
-
+	SDL_Thread * thread;
+	void test();
+	void moveAI();
+	void 	updateWalls();
 public:
 	Game();
 	~Game();
@@ -40,6 +43,7 @@ public:
 	float maxRow;
 	float column;
 	int tileSpawn;
+	Rect playerSpawnZone;
 	//ai
 	vector<NPC*> m_NPCs;
 	//player
@@ -53,8 +57,28 @@ public:
 	void render();
 	void loop();
 	int npcCount;
+	void onEvent(EventListener::Event);
+	void setupPlayerSpawnZone();
+	void moveRight();
+	void moveUp();
+	void moveLeft();
+	void moveDown();
 	
 
-	void onEvent(EventListener::Event);
+private:
+	int minX;
+	int maxX;
+	int minY;
+	int maxY;
+	int playerSpawnX;
+	int playerSpawnY;
+	float tileAmount;
+	//float tileCount = tileAmount * tileAmount;
+	float tileWidth;
+	float tileHeight;
+	int timer;
+	int level;
+	Rect* _camera;
+	Size2D winSize;
 };
 
