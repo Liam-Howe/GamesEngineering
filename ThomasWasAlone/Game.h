@@ -76,5 +76,6 @@ private:
 	float tileHeight;
 	int level;
 	Rect* _camera;
+	Size2D winSize;
 };
 

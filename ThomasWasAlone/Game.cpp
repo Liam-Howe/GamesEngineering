@@ -33,24 +33,27 @@ Game::~Game()
 
 
 bool Game::init() {	
-	level = 1;
-	Size2D winSize(600, 600);
+	level = 2;
+	Size2D winSize1(600, 600);
+	Size2D winSize2(800, 800);
+
 	if (level == 1)
 	{
 		tileAmount = 30;
-	
+		winSize = winSize1;
 	}
 	else if (level == 2)
 	{
 		tileAmount = 100;
-		//winSize(800, 800);
+		winSize = winSize2;
 	}
 	else if (level == 3)
 	{
 		tileAmount = 1000;
-		//winSize(800, 800);
+		winSize = winSize2;
 	}
-	
+	// (600, 600);
+
 	_camera = new Rect(0, 0, winSize.w, winSize.h);
 	
 	float aspectRatio = winSize.w / winSize.h;
@@ -62,7 +65,7 @@ bool Game::init() {
 	renderer.setViewPort(vpRect);
 	
 	
-	ThreadPool *t = ThreadPool::getInstance();
+	//ThreadPool *t = ThreadPool::getInstance();
 			
 	//tiles//tiles//tiles
 	
@@ -74,7 +77,8 @@ bool Game::init() {
 	tileHeight = 25;
 	//creates our renderer, which looks after drawing and the window
 	renderer.init(winSize,"Simple SDL App");
-	
+
+
 	 tile = 0;
 	 maxRow = 0;
 	 column = 0;
@@ -247,9 +251,9 @@ void Game::render()
 	//}
 
 
-	for (int row = _camera->pos.y; row < (_camera->size.h/tileHeight); row++)
+	for (int row = _camera->pos.y; row < (_camera->size.h/tileHeight) +_camera->pos.y; row++)
 	{
-		for (int col = _camera->pos.x; col < (_camera->size.w / tileWidth); col++)
+		for (int col = _camera->pos.x; col < (_camera->size.w / tileWidth) +_camera->pos.x; col++)
 		{
 			m_tiles[row][col]->Render(renderer, _camera->pos);
 		}
@@ -338,7 +342,10 @@ void Game::moveUp()
 }
 void Game::moveDown()
 {
-	_camera->pos.y += 1;
+	if (_camera->pos.y < tileAmount - (_camera->size.w / tileHeight))
+	{
+		_camera->pos.y += 1;
+	}
 }
 void Game::moveRight()
 {

@@ -58,7 +58,7 @@ Tile * Tile::previous()
 void Tile::Render(Renderer& r, Point2D _cameraPos)
 {
 	switch (m_type)
-	{//rect.pos.x -cameraOffsetX,rect.pos.y-cameraOffsetY,rect.size.w,rect.size.h
+	{
 	case tileType::START:
 		r.drawFillRect(Rect(_Rect.pos.x - _cameraPos.x*_Rect.size.w,_Rect.pos.y - _cameraPos.y*_Rect.size.h,_Rect.size.w,_Rect.size.h), m_col);
 		break;
