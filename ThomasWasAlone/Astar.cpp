@@ -2,11 +2,17 @@
 #include "Astar.h"
 
 
-std::vector<Tile*> Astar::astar(int row ,int col,int _gRow,int _gCol, std::vector<std::vector<Tile*>> &tiles, int tileAmount)
+std::vector<Tile*> Astar::astar(int row ,int col,int _gRow,int _gCol, std::vector<std::vector<Tile*>> &tiles, int _tileAmount)
 {
-	
+	//std::vector<std::vector<Tile*>>tiles = tile;
+	int tileAmount = _tileAmount;
 	Tile * startNode = tiles[row][col];
 	Tile * goalNode = tiles[_gRow][_gCol]; 
+	std::vector<Tile *> m_openList;
+	std::vector<Tile * > m_closedList;
+	std::vector<Tile *> m_path;
+	Tile * childNode;
+	Tile * currentNode;
 	
 	float goalXpos = _gCol;
 	float goalYpos = _gRow;
@@ -37,7 +43,24 @@ std::vector<Tile*> Astar::astar(int row ,int col,int _gRow,int _gCol, std::vecto
 		m_openList.push_back(currentNode);
 		m_closedList.push_back(currentNode);
 	   
-		calculateSurroundingNodes(currentNode, tiles, tileAmount);
+		//calculateSurroundingNodes(currentNode, tiles, tileAmount);
+
+		if (currentNode->getCol() < tileAmount - 1)
+		{
+			m_openList.push_back(tiles[currentNode->getCol() + 1][currentNode->getRow()]);
+		}
+		if (currentNode->getCol() > 0)
+		{
+			m_openList.push_back(tiles[currentNode->getCol() - 1][currentNode->getRow()]);
+		}
+		if (currentNode->getRow() > 0)
+		{
+			m_openList.push_back(tiles[currentNode->getCol()][currentNode->getRow() - 1]);
+		}
+		if (currentNode->getRow() < tileAmount - 1)
+		{
+			m_openList.push_back(tiles[currentNode->getCol()][currentNode->getRow() + 1]);
+		}
 		m_openList.erase(m_openList.begin());
 		for (int i = 0; i < m_openList.size(); i++)
 		{
@@ -47,7 +70,16 @@ std::vector<Tile*> Astar::astar(int row ,int col,int _gRow,int _gCol, std::vecto
 			m_openList[i]->setFCost(m_openList[i]->getGCost() + m_openList[i]->getHCost());
 		}
 		
-		sortByFCost(f);
+		//sortByFCost(f);
+		f = m_openList[0]->getFCost();
+		for (int i = 0; i < m_openList.size(); i++)
+		{
+			if (m_openList[i]->getFCost() <= f)
+			{
+				childNode = m_openList.at(i);
+				f = m_openList.at(i)->getFCost();
+			}
+		}
 		//m_path.push_back(childNode);
 		
 		currentNode = childNode;
@@ -79,34 +111,10 @@ int Astar::calculateFCost(Tile * n1, Tile * n2)
 
 void  Astar::sortByFCost(int f) 
 {
-	f = m_openList[0]->getFCost();
-	for (int i = 0; i < m_openList.size(); i++)
-	{
-		if (m_openList[i]->getFCost() <= f)
-		{
-			childNode = m_openList.at(i);
-			f = m_openList.at(i)->getFCost();
-		}
-	}
+
 }
 
 void Astar::calculateSurroundingNodes(Tile* currentNode, std::vector<std::vector<Tile*>> &tiles, int tileAmount)
 {
 
-	if (currentNode->getCol() < tileAmount -1)
-	{
-			m_openList.push_back(tiles[currentNode->getCol() + 1][currentNode->getRow()]);
-	}
-	if (currentNode->getCol() > 0)
-	{
-			m_openList.push_back(tiles[currentNode->getCol() - 1][currentNode->getRow()]);
-	}	
-	if (currentNode->getRow() > 0)
-	{
-			m_openList.push_back(tiles[currentNode->getCol()][currentNode->getRow() - 1]);
-	}
-	if (currentNode->getRow() < tileAmount -1)
-	{
-			m_openList.push_back(tiles[currentNode->getCol()][currentNode->getRow() + 1]);
-	}
 }

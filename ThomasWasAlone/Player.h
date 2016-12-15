@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-
+#include "Tile.h"
 class Player : public GameObject
 {
 
@@ -13,7 +13,8 @@ public :
 	void move(Point2D dir);
 	int getRow();
 	int getCol();
-
+	void getWayPoints(std::vector<std::vector<Tile*>> &r);
+	std::vector<Tile*> wayPoints();
 private:
 	Point2D m_Pos;
 	Size2D m_Size;
@@ -21,4 +22,5 @@ private:
 	Colour m_Col;
 	int m_Row;
 	int m_Coloumn;
+	std::vector<Tile*> m_wayPoints;
 };

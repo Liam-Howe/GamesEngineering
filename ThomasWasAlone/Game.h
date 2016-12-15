@@ -33,7 +33,7 @@ class Game:public EventListener
 	SDL_Thread * thread;
 	void test();
 	void moveAI();
-	
+	void 	updateWalls();
 public:
 	Game();
 	~Game();
@@ -63,6 +63,8 @@ public:
 	void moveUp();
 	void moveLeft();
 	void moveDown();
+	
+
 private:
 	int minX;
 	int maxX;
@@ -74,6 +76,7 @@ private:
 	//float tileCount = tileAmount * tileAmount;
 	float tileWidth;
 	float tileHeight;
+	int timer;
 	int level;
 	Rect* _camera;
 	Size2D winSize;

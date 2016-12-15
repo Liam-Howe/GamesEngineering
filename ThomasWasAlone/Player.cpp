@@ -23,6 +23,28 @@ void Player::Render(Renderer& r, Point2D _cameraPos)
 	r.drawFillRect(Rect(m_Player.pos.x - _cameraPos.x *m_Player.size.w,m_Player.pos.y - _cameraPos.y*m_Player.size.h,m_Player.size.w,m_Player.size.h), m_Col);
 
 }
+void Player::getWayPoints(std::vector<std::vector<Tile*>> &r)
+{
+	int _row =  m_Row;
+	int _col = m_Coloumn;
+	Tile* playerTile = r[_row][_col];
+	m_wayPoints.push_back(playerTile);
+	for (int row = 0; row < r.size(); row++)
+	{
+		for (int col = 0; col < r.size(); col++)
+		{
+			if (r[row][col]->getMarked() == true)
+			{
+				m_wayPoints.push_back(r[row][col]);
+			}
+		}
+	}
+}
+std::vector<Tile*> Player::wayPoints()
+{
+
+	return m_wayPoints;
+}
 
 void Player::move(Point2D dir)
 {

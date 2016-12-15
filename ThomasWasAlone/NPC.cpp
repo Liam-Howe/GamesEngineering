@@ -11,6 +11,7 @@ NPC::NPC(Point2D _Pos,float  _tileWidth,float  _tileHeight, Colour _colour, int 
 	m_Size.w = _tileWidth;
 	m_Size.h = _tileHeight;
 	m_Rect = new Rect(Point2D(m_Pos.x, m_Pos.y), Size2D(m_Size.w, m_Size.h));
+
 }
 
 NPC::~NPC()
@@ -25,10 +26,19 @@ void NPC::updateColour()
 	m_col = Colour(100, 20, 0);
 }
 
-
-void NPC::Update(unsigned int deltaTime)
+void NPC::setRow(int _row)
 {
 
+	m_Row = _row;
+}
+void NPC::setCol(int _col)
+{
+
+	m_coloumn = _col;
+}
+void NPC::Update(unsigned int deltaTime)
+{
+	
 
 }
 
@@ -67,11 +77,4 @@ void NPC::setPosition(Point2D _pos)
 	//m_Pos = _pos;
 }
 
-void NPC::setRow(int row)
-{
-	m_Row = row;
-}
-void NPC::setCol(int col)
-{
-	m_coloumn = col;
-}
+

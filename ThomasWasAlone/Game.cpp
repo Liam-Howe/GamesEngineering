@@ -33,7 +33,7 @@ Game::~Game()
 
 
 bool Game::init() {	
-	level = 2;
+	level = 3;
 	Size2D winSize1(600, 600);
 	Size2D winSize2(800, 800);
 
@@ -100,6 +100,7 @@ bool Game::init() {
 			m_tiles.push_back(temp);
 		}
 	}
+	//updateWalls();
 
 	//ai//ai//ai//ai//ai
 	if (level == 1)
@@ -115,42 +116,55 @@ bool Game::init() {
 		npcCount = 499;
 	}
 
-	 tileSpawn = 0;
+	 int tileSpawnx = 0;
+	
 	 if (level ==1)
 	 {
 		 for (int i = 0; i <= npcCount; i++)
 		 {
-			 tileSpawn = rand() % 30;
-			 NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight, Colour(255, 255, 255), tileSpawn, tileSpawn);
+			 tileSpawnx = 25 + i;
+			 
+			 NPC* _temp = new NPC(m_tiles[tileSpawnx][tileSpawnx]->getPosition(), tileWidth, tileHeight, Colour(255, 255, 255), tileSpawnx, tileSpawnx);
 			 m_NPCs.push_back(_temp);
 		 }
 
 	 }
 	 else if (level == 2)
 	 {
+		 int tileSpawny = 70;
 		 for (int i = 0; i <= npcCount; i++)
 		 {
-			 tileSpawn = rand() % (70 - 50 + 1) + 50;
-			 tileSpawn = rand() % (70 - 50 + 1) + 50;
-			// tileSpawn = rand() % 30;
-			 NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawn]->getPosition(), tileWidth, tileHeight, Colour(255, 255, 255), tileSpawn, tileSpawn);
+			 tileSpawn = 10 + i;
+			 NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawny]->getPosition(), tileWidth, tileHeight, Colour(255, 255, 255), tileSpawn, tileSpawny);
+			 m_NPCs.push_back(_temp);
+		 }
+
+	 }
+	 else if (level == 3)
+	 {
+		 int tileSpawny = 700;
+		 for (int i = 0; i <= npcCount; i++)
+		 {
+			 tileSpawn = 100 + i;
+			 NPC* _temp = new NPC(m_tiles[tileSpawn][tileSpawny]->getPosition(), tileWidth, tileHeight, Colour(255, 255, 255), tileSpawn, tileSpawny);
 			 m_NPCs.push_back(_temp);
 		 }
 
 	 }
 	 setupPlayerSpawnZone();
+	//_player->getWayPoints(m_tiles);
 	 ThreadPool *tp = ThreadPool::getInstance();
 	 ThreadPool::getInstance()->setPlayer(_player);
 	 ThreadPool::getInstance()->setAI(m_tiles);
 	 ThreadPool::getInstance()->setTileAmount(tileAmount);
 	//ThreadPool * pool = new ThreadPool();
 	
-	for (int i = 0; i <= npcCount; i++)
+	 for (int i = 0; i <= npcCount; i++)
 	{
 		tp->addNpc(m_NPCs[i]);
 	}
 	tp->addThread();
-	
+	//
 	//set up the viewport
 	//we want the vp centred on origin and 20 units wide
 
@@ -166,11 +180,11 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::LEFT, this);
 
 	//astar//astar//astar//astar
-	/*Astar _a;
-	for (int i = 0; i <= npcCount ; i++)
-	{
-		m_NPCs[i]->setPath(_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount));	
-    }*/
+	//Astar _a;
+	//for (int i = 0; i <= npcCount ; i++)
+	//{
+	//	m_NPCs[i]->setPath(_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount));	
+ //   }
 	
 	return true;	
 }
@@ -179,6 +193,7 @@ void Game::test()
 
 
 }
+
 
 void Game::setupPlayerSpawnZone() 
 {
@@ -216,25 +231,139 @@ void Game::update()
 	/*for (std::vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); i++) {
 		(*i)->Update(deltaTime);
 	}*/
-
+	for (int i = 0; i < m_NPCs.size(); i++)
+	{
+		m_NPCs[i]->Update(deltaTime);
+	}
 	//moveAI();
-
+	for (int row =0; row < m_tiles.size(); row++) {
+		for (int col =0; col != m_tiles.size(); col++) {
+		
+			m_tiles[row][col]->Update(deltaTime);
+		}
+	}
 
 	
 	//save the curent time for next frame
 	lastTime = currentTime;
 }
+void Game::updateWalls()
+{
+	if (level ==1)
+	{
+		for (int row = 0; row < tileAmount; row++)
+		{
 
+			for (int col = 0; col < tileAmount; col++)
+			{
+				if (col == 8 && row == 20)
+				{
+					m_tiles[row][col]->setMarked(true);
+				}
+				if (col == 8 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+					
+				}
+				if (col == 15 && row == 5)
+				{
+					m_tiles[row][col]->setMarked(true);
+				}
+				if (col == 15 && row > 5 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+					
+				}
+
+				if (col == 22 && row > 15 )
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 22 && row == 15)
+				{
+					m_tiles[row][col]->setMarked(true);
+				}
+			}
+
+		}
+	}
+	else if (level == 2)
+	{
+		for (int row = 0; row < tileAmount; row++)
+		{
+
+			for (int col = 0; col < tileAmount; col++)
+			{
+				if (col == 20 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 30 && row > 5 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 40 && row > 15)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 50 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 60 && row > 5 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 70 && row > 15)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+			}
+
+		}
+	}
+	else if (level == 3)
+	{
+		for (int row = 0; row < tileAmount; row++)
+		{
+
+			for (int col = 0; col < tileAmount; col++)
+			{
+				if (col == 100 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 200 && row > 5 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 300 && row > 15)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 400 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 500 && row > 5 && row < 20)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+				if (col == 600 && row > 15)
+				{
+					m_tiles[row][col]->setType(tileType::WALL);
+				}
+			}
+
+		}
+	}
+	
+
+}
 
 void Game::moveAI()
 {
-	for (int i = 0; i < m_NPCs.size(); i++)
-	{
-		for (int t = 0; t < m_NPCs[i]->getPath().size(); t++)
-		{
-			m_NPCs[i]->setPosition(m_NPCs[i]->getPath().at(t)->getPosition());// , m_NPCs[i]->getPath()[0]->getPosition().y);
-		}
-	}
+	
 }
 //** calls render on all game entities*/
 
@@ -349,7 +478,11 @@ void Game::moveDown()
 }
 void Game::moveRight()
 {
-	_camera->pos.x += 1;
+	if (_camera->pos.x < tileAmount - (_camera->size.w / tileWidth))
+	{
+		_camera->pos.x += 1;
+	}
+
 }
 void Game::moveLeft()
 {

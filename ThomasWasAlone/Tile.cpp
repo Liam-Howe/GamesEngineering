@@ -28,7 +28,7 @@ Tile::Tile(Point2D pos,float _width,float _height , tileType tile, int _gCost, i
 //		marked = false;
 		break;
 	case tileType::WALL:
-		m_col = Colour(100, 100, 100);
+		m_col = Colour(255, 0, 255);
 		break;
 	case tileType::GOAL:
 		m_col = Colour(0, 0, 0);
@@ -74,17 +74,17 @@ void Tile::Render(Renderer& r, Point2D _cameraPos)
 	}
 
 }
-//bool Tile::getMarked() 
-//{
-//	return marked;
-//} 
-//
-//void Tile::setMarked(bool value)
-//{
-//	marked = value;
-//}
-//
-//
+bool Tile::getMarked() 
+{
+	return marked;
+} 
+
+void Tile::setMarked(bool value)
+{
+	marked = value;
+}
+
+
 
 void Tile::setColour(Colour _col)
 {
@@ -92,13 +92,19 @@ void Tile::setColour(Colour _col)
 	m_col = _col;
 
 }
+
+void Tile::setType(tileType type)
+{
+	m_type = type;
+	m_col = Colour(255, 0, 255);
+}
 void Tile::Update(unsigned int deltaTime) 
 {
 
-	/*if (marked)
+	if (marked)
 	{
 		m_col = Colour(0, 0, 255);
-	}*/
+	}
 }
 
 int Tile::getGCost()

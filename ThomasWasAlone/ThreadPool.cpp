@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ThreadPool.h"
-
+#include <iostream>
 ThreadPool * ThreadPool::m_instance = nullptr;
 std::queue<NPC*>ThreadPool::_enemyQeue;
 ThreadPool::ThreadPool()
@@ -47,12 +47,12 @@ void ThreadPool::remove()
 NPC * ThreadPool::getJob()
 {
 	//SDL_mutexP(_lock);
-	if (_enemyQeue.size() > 0)
-	{
+	/*if (_enemyQeue.size() > 0)
+	{*/
 	NPC * temp = _enemyQeue.front();
 	_enemyQeue.pop();
 	return temp;
-	}
+	//}
 	//SDL_mutexV(_lock);
 	
 }
@@ -79,15 +79,23 @@ int ThreadPool::worker(void *ptr)
 		ThreadPool *t = ThreadPool::getInstance();
 		
 	    SDL_SemWait(t->getSem());
-		NPC * npc;
-		npc = t->getJob();
-		
+		NPC * npc =nullptr;
+	    npc = t->getJob();
 		SDL_SemPost(t->getSem());
 		if (npc != NULL)
 		{
 			Astar a;
 			//_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount)
+		//	std::cout << "hi" << std::endl;
 			npc->setPath(a.astar(npc->getRow(),npc->getCol(), ThreadPool::getInstance()->getPlayer().getRow(), ThreadPool::getInstance()->getPlayer().getCol(), ThreadPool::getInstance()->getTiles(), ThreadPool::getInstance()->getTileAmount()));
+		
+				//std::vector<Tile*> way = ThreadPool::getInstance()->getPlayer().wayPoints().at(0)->;// ()
+			//for (int  i = ThreadPool::getInstance()->getPlayer().wayPoints().size()-1; i >= 0; i--)
+			//{
+			//	npc->setPath(a.astar(npc->getRow(), npc->getCol(), ThreadPool::getInstance()->getPlayer().wayPoints().at(i)->getRow(), ThreadPool::getInstance()->getPlayer().wayPoints().at(i)->getCol(), ThreadPool::getInstance()->getTiles(), ThreadPool::getInstance()->getTileAmount()));
+			//	npc->setRow(ThreadPool::getInstance()->getPlayer().wayPoints().at(i)->getRow());// , ThreadPool::getInstance()->getPlayer().wayPoints().at(i)->getCol())
+			//	npc->setCol(ThreadPool::getInstance()->getPlayer().wayPoints().at(i)->getCol());
+			//}
 		}
 	}
 	return 0;
