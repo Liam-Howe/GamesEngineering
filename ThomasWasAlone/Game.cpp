@@ -14,7 +14,7 @@ using namespace std;
 #include "Astar.h"
 #include "ThreadPool.h"
 #include <functional>
-const int SCREEN_FPS = 100;
+const int SCREEN_FPS = 1000;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
 
@@ -180,11 +180,11 @@ bool Game::init() {
 	inputManager.AddListener(EventListener::Event::LEFT, this);
 
 	//astar//astar//astar//astar
-	//Astar _a;
-	//for (int i = 0; i <= npcCount ; i++)
-	//{
-	//	m_NPCs[i]->setPath(_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount));	
- //   }
+	/*Astar _a;
+	for (int i = 0; i <= npcCount ; i++)
+	{
+		m_NPCs[i]->setPath(_a.astar(m_NPCs[i]->getRow(),m_NPCs[i]->getCol(), _player->getRow(),_player->getCol(), m_tiles, tileAmount));	
+    }*/
 	
 	return true;	
 }

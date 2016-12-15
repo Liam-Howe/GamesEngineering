@@ -1,19 +1,34 @@
 ﻿  stdafx.cpp
   Tile.cpp
+  ThreadPool.cpp
+c:\users\liam\desktop\gamesengineering\thomaswasalone\threadpool.cpp(90): error C2664: 'std::vector<Tile *,std::allocator<_Ty>> Astar::astar(int,int,int,int,std::vector<std::vector<_Ty,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>> &,int)': cannot convert argument 5 from 'std::vector<std::vector<Tile *,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>' to 'std::vector<std::vector<Tile *,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>> &'
+          with
+          [
+              _Ty=Tile *
+          ]
+  c:\users\liam\desktop\gamesengineering\thomaswasalone\threadpool.cpp(90): note: A non-const reference may only be bound to an lvalue
   SDL_Starter_app.cpp
   Renderer.cpp
   LTimer.cpp
   InputManager.cpp
   Game.cpp
-c:\gamesengineering\thomaswasalone\game.cpp(37): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(159): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(205): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(230): warning C4018: '<': signed/unsigned mismatch
+c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(234): warning C4018: '<': signed/unsigned mismatch
+c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(398): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\game.cpp(400): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Player.cpp
+c:\users\liam\desktop\gamesengineering\thomaswasalone\player.cpp(32): warning C4018: '<': signed/unsigned mismatch
+c:\users\liam\desktop\gamesengineering\thomaswasalone\player.cpp(34): warning C4018: '<': signed/unsigned mismatch
   NPC.cpp
   Astar.cpp
-c:\gamesengineering\thomaswasalone\astar.cpp(64): warning C4018: '<': signed/unsigned mismatch
-c:\gamesengineering\thomaswasalone\astar.cpp(73): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(82): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(90): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\gamesengineering\thomaswasalone\astar.cpp(98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(18): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(24): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(65): warning C4018: '<': signed/unsigned mismatch
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(75): warning C4018: '<': signed/unsigned mismatch
+c:\users\liam\desktop\gamesengineering\thomaswasalone\astar.cpp(94): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-  ThomasWasAlone.vcxproj -> C:\GamesEngineering\Debug\SDL_Starter_app.exe
-  ThomasWasAlone.vcxproj -> C:\GamesEngineering\Debug\SDL_Starter_app.pdb (Full PDB)
