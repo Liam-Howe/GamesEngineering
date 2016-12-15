@@ -17,8 +17,8 @@ public:
 	void setPosition(Point2D _pos);
 	std::vector<Tile*> getPath();
 	void setPath(std::vector<Tile*>);
-	 //int getPathPos();
-	// void setPathPos(int val);
+	 int getPathPos();
+	 void setPathPos(int val);
 	
 private:
 	Point2D m_Pos;
@@ -28,8 +28,8 @@ private:
 	int m_Row;
 	int m_coloumn;
 	std::vector<Tile*> m_path;
-	//int timer;
-	//int pathpos;
+	int timer;
+	int pathpos;
 
 };
 

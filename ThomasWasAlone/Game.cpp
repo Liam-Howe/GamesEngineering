@@ -226,22 +226,37 @@ void Game::update()
 {
 	unsigned int currentTime = LTimer::gameTime();//millis since game started
 	unsigned int deltaTime = currentTime - lastTime;//time since last update
+	timer++;
+	for (int i = 0; i < m_NPCs.size(); i++)
+	{
+		if (timer >10)
+		{
+			if (m_NPCs[i]->getPathPos() < m_NPCs[i]->getPath().size())
+			{
+				m_NPCs[i]->setPosition(m_NPCs[i]->getPath().at(m_NPCs[i]->getPathPos())->getPosition());// ->getRow());
+				//m_NPCs[i]->setCol(m_NPCs[i]->getPath().at(i)->getCol());
+				timer = 0;
+				m_NPCs[i]->setPathPos(1);
+			}
 
+		}
+
+	}
 	//call update on all game objects
 	/*for (std::vector<GameObject*>::iterator i = gameObjects.begin(); i != gameObjects.end(); i++) {
 		(*i)->Update(deltaTime);
 	}*/
-	for (int i = 0; i < m_NPCs.size(); i++)
+	/*for (int i = 0; i < m_NPCs.size(); i++)
 	{
 		m_NPCs[i]->Update(deltaTime);
-	}
+	}*/
 	//moveAI();
-	for (int row =0; row < m_tiles.size(); row++) {
-		for (int col =0; col != m_tiles.size(); col++) {
-		
-			m_tiles[row][col]->Update(deltaTime);
-		}
-	}
+	//for (int row =0; row < m_tiles.size(); row++) {
+	//	for (int col =0; col != m_tiles.size(); col++) {
+	//	
+	//		m_tiles[row][col]->Update(deltaTime);
+	//	}
+	//}
 
 	
 	//save the curent time for next frame
